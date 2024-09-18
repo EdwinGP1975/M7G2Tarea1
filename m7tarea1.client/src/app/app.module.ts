@@ -5,17 +5,34 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AngularMaterialModule } from './angular-material.module';
+
 import { HomeComponent } from './home/home.component';
+import { FabricantesComponent } from './fabricantes/fabricantes.component';
+import { GrupoProductosComponent } from './grupo-productos/grupo-productos.component';
+import { ProductosComponent } from './productos/productos.component';
+import { ProveedoresComponent } from './proveedores/proveedores.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    FabricantesComponent,
+    GrupoProductosComponent,
+    ProductosComponent,
+    ProveedoresComponent,
+    NavMenuComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    AngularMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

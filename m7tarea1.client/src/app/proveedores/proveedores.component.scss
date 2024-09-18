@@ -1,0 +1,41 @@
+th,
+td {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+table {
+  margin: 0 auto;
+}
+
+tr:nth-child(even) {
+  background: #F2F2F2;
+}
+
+tr:nth-child(odd) {
+  background: #FFF;
+}
+
+li {
+  list-style: none;
+}
+
+.text-right {
+  text-align: right;
+}
+
+button {
+  padding: 5px;
+}
+
+.formulario {
+  border: 1px solid #c3c3c3;
+  padding: 15px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.registrar {
+  padding: 10px;
+  margin: 15px;
+}

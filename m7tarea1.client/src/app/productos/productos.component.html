@@ -1,0 +1,119 @@
+<h1 id="tableLabel">Productos</h1>
+<div class="text-right">
+  <button (click)="openBlockNew()" mat-raised-button>Nuevo</button>
+</div>
+<div *ngIf="showNew" class="formulario">
+  <h4>Registrar</h4>
+  <form [formGroup]="formRegister">
+
+    <p>
+      <label for="cSku">Sku : </label>
+      <input type="text" [formControl]="formRegister.controls['cSku']">
+    </p>
+    <p>
+      <label for="cNombre">Nombre : </label>
+      <input type="text" [formControl]="formRegister.controls['cNombre']">
+    </p>
+    <p>
+      <label for="cNombreExtrangero">Nombre Extrangero : </label>
+      <input type="text" [formControl]="formRegister.controls['cNombreExtrangero']">
+    </p>
+    <p>
+      <label for="nPeso">Peso : </label>
+      <input type="text" [formControl]="formRegister.controls['nPeso']">
+    </p>
+    <p>
+      <label for="cUM">UM : </label>
+      <input type="text" [formControl]="formRegister.controls['cUM']">
+    </p>
+    <p>
+      <label for="nPrecioLista">Precio Lista : </label>
+      <input type="text" [formControl]="formRegister.controls['nPrecioLista']">
+    </p>
+    <p>
+      <label for="nPrecioBase">Precio Base : </label>
+      <input type="text" [formControl]="formRegister.controls['nPrecioBase']">
+    </p>
+    <p>
+      <label for="cCodBarra">Cod Barra : </label>
+      <input type="text" [formControl]="formRegister.controls['cCodBarra']">
+    </p>
+    <p>
+      <label for="cSkuFabricante">Sku Fabricante : </label>
+      <input type="text" [formControl]="formRegister.controls['cSkuFabricante']">
+    </p>
+    <p>
+      <label for="cSkuAlternante">Sku Alternante : </label>
+      <input type="text" [formControl]="formRegister.controls['cSkuAlternante']">
+    </p>
+    <!--<p>
+      <label for="cNombreGrupoProducto">Nombre Grupo Producto : </label>
+      <input type="text" [formControl]="formRegister.controls['cNombreGrupoProducto']">
+    </p>-->
+    <p>
+      <label for="grupoProductoId">grupo Producto Id : </label>
+      <input type="text" [formControl]="formRegister.controls['grupoProductoId']">
+    </p>
+    <p>
+      <label for="fabricanteId">fabricante Id : </label>
+      <input type="text" [formControl]="formRegister.controls['fabricanteId']">
+    </p>
+    <!--<p>
+      <label for="grupoProducto">grupo Producto : </label>
+      <input type="text" [formControl]="formRegister.controls['grupoProducto']">
+    </p>
+    <p>
+      <label for="proveedores">proveedores : </label>
+      <input type="text" [formControl]="formRegister.controls['proveedores']">
+    </p>
+    <p>
+      <label for="fabricante">fabricante : </label>
+      <input type="text" [formControl]="formRegister.controls['fabricante']">
+    </p>-->
+  </form>
+  <button class="registrar" (click)="registrar()">
+    Registrar
+  </button>
+</div>
+<table *ngIf="productos">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Sku</th>
+      <th>Nombre</th>
+      <th>Nombre Extrangero</th>
+      <th>Peso</th>
+      <th>UM</th>
+      <th>Precio Lista</th>
+      <th>Precio Base</th>
+      <th>Cod Barra</th>
+      <th>Sku Fabricante</th>
+      <th>Sku Alternante</th>
+      <th>grupo Producto Id</th>
+      <th>fabricanteId</th>
+      <!--<th>grupoProducto</th>
+      <th>proveedores</th>
+      <th>fabricante</th>-->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let producto of productos">
+      <td>{{ producto.id }}</td>
+      <td>{{ producto.cSku }}</td>
+      <td>{{ producto.cNombre }}</td>
+      <td>{{ producto.cNombreExtrangero }}</td>
+      <td>{{ producto.nPeso }}</td>
+      <td>{{ producto.cUM }}</td>
+      <td>{{ producto.nPrecioLista }}</td>
+      <td>{{ producto.nPrecioBase }}</td>
+      <td>{{ producto.cCodBarra }}</td>
+      <td>{{ producto.cSkuFabricante }}</td>
+      <td>{{ producto.cSkuAlternante }}</td>
+      <td>{{ producto.grupoProductoId }}</td>
+      <td>{{ producto.fabricanteId }}</td>
+      <!--<td>{{ producto.grupoProducto }}</td>
+      <td>{{ producto.proveedores }}</td>
+      <td>{{ producto.fabricante }}</td>-->
+    </tr>
+  </tbody>
+</table>

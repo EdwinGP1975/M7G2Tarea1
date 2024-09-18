@@ -1,0 +1,29 @@
+<h1 id="tableLabel">Fabricantes</h1>
+<div class="text-right">
+  <button (click)="openBlockNew()" mat-raised-button>Nuevo</button>
+</div>
+<div *ngIf="showNew" class="formulario">
+  <h4>Registrar</h4>
+  <form [formGroup]="formRegister">
+    <label for="cNmbFabricante">Nombre Fabricante : </label>
+    <input type="text" [formControl]="formRegister.controls['cNmbFabricante']">
+  </form>
+  <button class="registrar" (click)="registrar()">
+    Registrar
+  </button>
+</div>
+<table *ngIf="fabricantes">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nombre fabricante</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let fabricante of fabricantes">
+      <td>{{ fabricante.id }}</td>
+      <td>{{ fabricante.cNmbFabricante }}</td>
+
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,37 @@
+<h1 id="tableLabel">Grupo productos</h1>
+<div class="text-right">
+  <button (click)="openBlockNew()" mat-raised-button>Nuevo</button>
+</div>
+<div *ngIf="showNew" class="formulario">
+  <h4>Registrar</h4>
+  <form [formGroup]="formRegister">
+    <p>
+      <label for="cCodGrupoProducto">Cod Grupo Producto : </label>
+      <input type="text" [formControl]="formRegister.controls['cCodGrupoProducto']">
+    </p>
+    <p>
+      <label for="cNombreGrupoProducto">Nombre Grupo Producto : </label>
+      <input type="text" [formControl]="formRegister.controls['cNombreGrupoProducto']">
+    </p>
+
+  </form>
+  <button class="registrar" (click)="registrar()">
+    Registrar
+  </button>
+</div>
+<table *ngIf="grupoProductos">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Cod Grupo Producto</th>
+      <th>Nombre Grupo Producto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let grupoProd of grupoProductos">
+      <td>{{ grupoProd.id }}</td>
+      <td>{{ grupoProd.cCodGrupoProducto }}</td>
+      <td>{{ grupoProd.cNombreGrupoProducto }}</td>
+    </tr>
+  </tbody>
+</table>
