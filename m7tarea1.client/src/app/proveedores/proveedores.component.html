@@ -5,8 +5,14 @@
 <div *ngIf="showNew" class="formulario">
   <h4>Registrar</h4>
   <form [formGroup]="formRegister">
-    <label for="cNmbProveedor">Nombre Proveedor : </label>
-    <input type="text" [formControl]="formRegister.controls['cNmbProveedor']">
+    <p>
+      <label for="cNmbProveedor">Nombre Proveedor : </label>
+      <input type="text" [formControl]="formRegister.controls['cNmbProveedor']">
+    </p>
+    <p>
+      <label for="productoId">Id Producto : </label>
+      <input type="text" [formControl]="formRegister.controls['productoId']">
+    </p>
   </form>
   <button class="registrar" (click)="registrar()">
     Registrar

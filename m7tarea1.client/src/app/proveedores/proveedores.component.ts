@@ -45,7 +45,8 @@ export class ProveedoresComponent {
   }
   initForm() {
     this.formRegister = this.fb.group({
-      cNmbProveedor: [null]
+      cNmbProveedor: [null],
+      productoId: [null]
     });
   }
 }
