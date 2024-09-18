@@ -1,11 +1,28 @@
+using M7Tarea1.Server.Data;
+using M7Tarea1.Server.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.WriteIndented = true;
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// Add ApplicationDbContrxt and SQL Server support
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Services Registration
+builder.Services.AddScoped<IServicio, ServicioFabricante>();
+builder.Services.AddScoped<IServicio, ServicioGrupoProducto>();
+builder.Services.AddScoped<IServicio, ServicioProducto>();
+builder.Services.AddScoped<IServicio, ServicioProveedor>();
 
 var app = builder.Build();
 
