@@ -19,10 +19,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Services Registration
-builder.Services.AddScoped<IServicio, ServicioFabricante>();
-builder.Services.AddScoped<IServicio, ServicioGrupoProducto>();
-builder.Services.AddScoped<IServicio, ServicioProducto>();
-builder.Services.AddScoped<IServicio, ServicioProveedor>();
+builder.Services.AddScoped<ServicioFabricante>();
+builder.Services.AddScoped<ServicioGrupoProducto>();
+builder.Services.AddScoped<ServicioProducto>();
+builder.Services.AddScoped<ServicioProveedor>();
 
 var app = builder.Build();
 

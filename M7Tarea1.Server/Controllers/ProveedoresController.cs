@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using M7Tarea1.Server.Data;
 using M7Tarea1.Server.Data.Models;
+using M7Tarea1.Server.Services;
 
 namespace M7Tarea1.Server.Controllers
 {
@@ -15,10 +16,12 @@ namespace M7Tarea1.Server.Controllers
     public class ProveedoresController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private ServicioProveedor _servicioProveedor;
 
-        public ProveedoresController(ApplicationDbContext context)
+        public ProveedoresController(ApplicationDbContext context, ServicioProveedor servicioProveedor)
         {
             _context = context;
+            _servicioProveedor = servicioProveedor;
         }
 
         // GET: api/Proveedores
@@ -78,9 +81,8 @@ namespace M7Tarea1.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Proveedor>> PostProveedor(Proveedor proveedor)
         {
-            _context.Proveedor.Add(proveedor);
-            await _context.SaveChangesAsync();
-
+            await _servicioProveedor.Registrar(proveedor);
+            
             return CreatedAtAction("GetProveedor", new { id = proveedor.Id }, proveedor);
         }
 

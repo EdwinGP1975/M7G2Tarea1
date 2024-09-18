@@ -5,11 +5,15 @@ namespace M7Tarea1.Server.Services
 {
     public class ServicioFabricante : IServicio
     {
-        public async void Registrar(Object item, ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;
+        public ServicioFabricante(ApplicationDbContext context) {
+            _context = context;
+        }
+        public async Task Registrar(Object item)
         {
             Fabricante fabricante = (Fabricante)item;
-            context.Fabricante.Add(fabricante);
-            await context.SaveChangesAsync();
+            _context.Fabricante.Add(fabricante);
+            await _context.SaveChangesAsync();
         }
     }
 }

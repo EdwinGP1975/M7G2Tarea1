@@ -5,9 +5,16 @@ namespace M7Tarea1.Server.Services
 {
     public class ServicioProveedor : IServicio
     {
-        public void Registrar(Object item, ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;
+        public ServicioProveedor(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        public async Task Registrar(Object item)
         {
             Proveedor proveedor = (Proveedor)item;
+            _context.Proveedor.Add(proveedor);
+            await _context.SaveChangesAsync();
         }
     }
 }

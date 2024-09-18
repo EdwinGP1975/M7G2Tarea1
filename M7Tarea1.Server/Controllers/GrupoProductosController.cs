@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using M7Tarea1.Server.Data;
 using M7Tarea1.Server.Data.Models;
+using M7Tarea1.Server.Services;
 
 namespace M7Tarea1.Server.Controllers
 {
@@ -15,10 +16,11 @@ namespace M7Tarea1.Server.Controllers
     public class GrupoProductosController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-
-        public GrupoProductosController(ApplicationDbContext context)
+        private ServicioGrupoProducto _grupoProductos;
+        public GrupoProductosController(ApplicationDbContext context, ServicioGrupoProducto grupoProducto)
         {
             _context = context;
+            _grupoProductos = grupoProducto;
         }
 
         // GET: api/GrupoProductos
@@ -78,9 +80,8 @@ namespace M7Tarea1.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<GrupoProducto>> PostGrupoProducto(GrupoProducto grupoProducto)
         {
-            _context.GrupoProductos.Add(grupoProducto);
-            await _context.SaveChangesAsync();
-
+            await _grupoProductos.Registrar(grupoProducto);
+            
             return CreatedAtAction("GetGrupoProducto", new { id = grupoProducto.Id }, grupoProducto);
         }
 

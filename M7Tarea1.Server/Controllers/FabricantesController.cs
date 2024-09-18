@@ -81,9 +81,7 @@ namespace M7Tarea1.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Fabricante>> PostFabricante(Fabricante fabricante)
         {
-            _servicioFabricante.Registrar(fabricante, _context);
-;            //_context.Fabricante.Add(fabricante);
-            //await _context.SaveChangesAsync();
+            await _servicioFabricante.Registrar(fabricante);
 
             return CreatedAtAction("GetFabricante", new { id = fabricante.Id }, fabricante);
         }

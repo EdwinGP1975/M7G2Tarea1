@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using M7Tarea1.Server.Data;
 using M7Tarea1.Server.Data.Models;
+using M7Tarea1.Server.Services;
 
 namespace M7Tarea1.Server.Controllers
 {
@@ -15,10 +16,12 @@ namespace M7Tarea1.Server.Controllers
     public class ProductosController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private ServicioProducto _servicioProducto;
 
-        public ProductosController(ApplicationDbContext context)
+        public ProductosController(ApplicationDbContext context, ServicioProducto servicioProducto)
         {
             _context = context;
+            _servicioProducto = servicioProducto;
         }
 
         // GET: api/Productos
@@ -78,9 +81,8 @@ namespace M7Tarea1.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Producto>> PostProducto(Producto producto)
         {
-            _context.Productos.Add(producto);
-            await _context.SaveChangesAsync();
-
+            await _servicioProducto.Registrar(producto);
+            
             return CreatedAtAction("GetProducto", new { id = producto.Id }, producto);
         }
 

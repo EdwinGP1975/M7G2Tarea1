@@ -6,11 +6,16 @@ namespace M7Tarea1.Server.Services
 {
     public class ServicioProducto : IServicio
     {
-        public async void  Registrar(Object item, ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;
+        public ServicioProducto(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        public async Task Registrar(Object item)
         {
             Producto producto = (Producto)item;
-            context.Productos.Add(producto);
-            await context.SaveChangesAsync();
+            _context.Productos.Add(producto);
+            await _context.SaveChangesAsync();
         }
 
         public void RegistrarPrecioBaseProducto(int idProducto, decimal precio) { }
@@ -21,5 +26,7 @@ namespace M7Tarea1.Server.Services
 
             return skus;
         }
+
+        public void RegistrarMinimoMaximoMRPAlmacen() { }
     }
 }
