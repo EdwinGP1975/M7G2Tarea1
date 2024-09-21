@@ -16,7 +16,7 @@ namespace M7Tarea1.Server.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    cNmbFabricante = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    cNmbFabricante = table.Column<string>(type: "nvarchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,8 +29,8 @@ namespace M7Tarea1.Server.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    cCodGrupoProducto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    cNombreGrupoProducto = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    cCodGrupoProducto = table.Column<string>(type: "nvarchar(10)", nullable: false),
+                    cNombreGrupoProducto = table.Column<string>(type: "nvarchar(150)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,16 +43,16 @@ namespace M7Tarea1.Server.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    cSku = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    cNombre = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    cNombreExtrangero = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    cSku = table.Column<string>(type: "nvarchar(25)", nullable: false),
+                    cNombre = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    cNombreExtrangero = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     nPeso = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
-                    cUM = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    cUM = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     nPrecioLista = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     nPrecioBase = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
-                    cCodBarra = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    cSkuFabricante = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    cSkuAlternante = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    cCodBarra = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    cSkuFabricante = table.Column<string>(type: "nvarchar(25)", nullable: false),
+                    cSkuAlternante = table.Column<string>(type: "nvarchar(25)", nullable: false),
                     GrupoProductoId = table.Column<int>(type: "int", nullable: false),
                     FabricanteId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -79,7 +79,7 @@ namespace M7Tarea1.Server.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    cNmbProveedor = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    cNmbProveedor = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     ProductoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -94,21 +94,6 @@ namespace M7Tarea1.Server.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fabricantes_cNmbFabricante",
-                table: "Fabricantes",
-                column: "cNmbFabricante");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GrupoProductos_cNombreGrupoProducto",
-                table: "GrupoProductos",
-                column: "cNombreGrupoProducto");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Productos_cNombre",
-                table: "Productos",
-                column: "cNombre");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Productos_FabricanteId",
                 table: "Productos",
                 column: "FabricanteId");
@@ -117,11 +102,6 @@ namespace M7Tarea1.Server.Data.Migrations
                 name: "IX_Productos_GrupoProductoId",
                 table: "Productos",
                 column: "GrupoProductoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Proveedores_cNmbProveedor",
-                table: "Proveedores",
-                column: "cNmbProveedor");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Proveedores_ProductoId",

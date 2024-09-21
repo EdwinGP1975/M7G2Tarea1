@@ -4,18 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace M7Tarea1.Server.Data.Models
 {
-    [Table("Fabricantes")]
-    [Index(nameof(cNmbFabricante))]
     public class Fabricante
     {
         #region Properties
         /// <summary>
         /// Unique id and primary key
         /// </summary>
-        [Key]
-        [Required]
         public int Id { get; set; }
-        public required string cNmbFabricante { get; set; }
+        public string cNmbFabricante { get; set; }
         #endregion
 
         #region Navigation Properties

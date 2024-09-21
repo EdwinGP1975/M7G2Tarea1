@@ -4,16 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace M7Tarea1.Server.Data.Models
 {
-    [Table("Productos")]
-    [Index(nameof(cNombre))]
     public class Producto
     {
         #region Properties
         /// <summary>
         /// Unique Id that is the primary Key
         /// </summary>
-        [Key]
-        [Required]
         public int Id { get; set; }
         /// <summary>
         ///  Stock Keeping Unit code
@@ -22,7 +18,7 @@ namespace M7Tarea1.Server.Data.Models
         /// <summary>
         /// Product name
         /// </summary>
-        public required string cNombre { get; set; }
+        public string cNombre { get; set; }
         /// <summary>
         /// Foreign product name in other countries
         /// </summary>
@@ -35,7 +31,7 @@ namespace M7Tarea1.Server.Data.Models
         /// <summary>
         /// Unit of Measure
         /// </summary>
-        public required string cUM { get; set; }
+        public string cUM { get; set; }
         /// <summary>
         /// List Price of the product
         /// </summary>
@@ -62,13 +58,11 @@ namespace M7Tarea1.Server.Data.Models
         /// <summary>
         /// GrupoProductoId (foreign key)
         /// </summary>
-        [ForeignKey(nameof(GrupoProducto))]
         public int GrupoProductoId { get; set; }
 
         /// <summary>
         /// FabricanteId (foreign key)
         /// </summary>
-        [ForeignKey(nameof(Fabricante))]
         public int FabricanteId { get; set; }
         #endregion
 

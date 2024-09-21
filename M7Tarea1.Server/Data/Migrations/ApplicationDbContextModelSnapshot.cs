@@ -31,13 +31,11 @@ namespace M7Tarea1.Server.Data.Migrations
 
                     b.Property<string>("cNmbFabricante")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("cNmbFabricante");
-
-                    b.ToTable("Fabricantes");
+                    b.ToTable("Fabricantes", (string)null);
                 });
 
             modelBuilder.Entity("M7Tarea1.Server.Data.Models.GrupoProducto", b =>
@@ -50,17 +48,15 @@ namespace M7Tarea1.Server.Data.Migrations
 
                     b.Property<string>("cCodGrupoProducto")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("cNombreGrupoProducto")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("cNombreGrupoProducto");
-
-                    b.ToTable("GrupoProductos");
+                    b.ToTable("GrupoProductos", (string)null);
                 });
 
             modelBuilder.Entity("M7Tarea1.Server.Data.Models.Producto", b =>
@@ -79,31 +75,31 @@ namespace M7Tarea1.Server.Data.Migrations
 
                     b.Property<string>("cCodBarra")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("cNombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("cNombreExtrangero")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("cSku")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("cSkuAlternante")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("cSkuFabricante")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("cUM")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("nPeso")
                         .HasColumnType("decimal(8,2)");
@@ -120,9 +116,7 @@ namespace M7Tarea1.Server.Data.Migrations
 
                     b.HasIndex("GrupoProductoId");
 
-                    b.HasIndex("cNombre");
-
-                    b.ToTable("Productos");
+                    b.ToTable("Productos", (string)null);
                 });
 
             modelBuilder.Entity("M7Tarea1.Server.Data.Models.Proveedor", b =>
@@ -138,15 +132,13 @@ namespace M7Tarea1.Server.Data.Migrations
 
                     b.Property<string>("cNmbProveedor")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductoId");
 
-                    b.HasIndex("cNmbProveedor");
-
-                    b.ToTable("Proveedores");
+                    b.ToTable("Proveedores", (string)null);
                 });
 
             modelBuilder.Entity("M7Tarea1.Server.Data.Models.Producto", b =>
