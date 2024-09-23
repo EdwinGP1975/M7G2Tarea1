@@ -4,6 +4,7 @@ using M7Tarea1.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace M7Tarea1.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240923010406_Api2")]
+    partial class Api2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,6 +55,7 @@ namespace M7Tarea1.Server.Data.Migrations
                         .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Direccion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Nombre")
@@ -121,7 +125,7 @@ namespace M7Tarea1.Server.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(25)");
 
-                    b.Property<decimal?>("Descuento")
+                    b.Property<decimal>("Descuento")
                         .HasColumnType("decimal(4,2)");
 
                     b.Property<string>("Nombre")
@@ -289,7 +293,7 @@ namespace M7Tarea1.Server.Data.Migrations
                     b.Property<bool>("ConIva")
                         .HasColumnType("bit");
 
-                    b.Property<decimal?>("DescuentoGlobal")
+                    b.Property<decimal>("DescuentoGlobal")
                         .HasColumnType("decimal(4,2)");
 
                     b.Property<int?>("EmpresaId")
@@ -308,10 +312,10 @@ namespace M7Tarea1.Server.Data.Migrations
                     b.Property<int?>("PersonaId")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("PrecioTotal")
+                    b.Property<decimal>("PrecioTotal")
                         .HasColumnType("decimal(8,2)");
 
-                    b.Property<decimal?>("PrecioTotalDescuento")
+                    b.Property<decimal>("PrecioTotalDescuento")
                         .HasColumnType("decimal(8,2)");
 
                     b.HasKey("Id");

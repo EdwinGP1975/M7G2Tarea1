@@ -8,14 +8,16 @@
         public int NitFacturacion { get; set; }
         public string NombreFacturacion { get; set; }
         public bool ConIva { get; set; }
-        public decimal DescuentoGlobal { get; set; }
-        public decimal PrecioTotal { get; set; }
+        public decimal? DescuentoGlobal { get; set; }
+        public decimal? PrecioTotal { get; set; }
         //precio total despues de aplicar el descuento global
-        public decimal PrecioTotalDescuento {  get; set; }
-        public int ClienteId { get; set; }
+        public decimal? PrecioTotalDescuento {  get; set; }
+        public int? PersonaId { get; set; }
+        public int? EmpresaId { get; set; }
 
         //Navegacion
-        public Cliente? Cliente { get; set; }
+        public Persona? Persona { get; set; }
+        public Empresa? Empresa { get; set; }
         public ICollection<VentaDetalle>? VentaDetalle { get; set; }
 
     }

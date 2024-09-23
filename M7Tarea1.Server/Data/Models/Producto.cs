@@ -64,7 +64,7 @@ namespace M7Tarea1.Server.Data.Models
         /// FabricanteId (foreign key)
         /// </summary>
         public int FabricanteId { get; set; }
-        public int VentaDetalleId {  get; set; }
+        public int? VentaDetalleId {  get; set; }
         #endregion
 
         #region Navigation Properties

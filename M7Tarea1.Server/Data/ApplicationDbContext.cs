@@ -10,6 +10,13 @@ namespace M7Tarea1.Server.Data
         public DbSet<GrupoProducto> GrupoProductos => Set<GrupoProducto>();
         public DbSet<Proveedor> Proveedor => Set<Proveedor>();
         public DbSet<Fabricante> Fabricante => Set<Fabricante>();
+        public DbSet<Servicio> Servicio => Set<Servicio>();
+        public DbSet<Almacen> Almacen => Set<Almacen>();
+        public DbSet<Persona> Persona => Set<Persona>();
+        public DbSet<Empresa> Empresa => Set<Empresa>();
+        public DbSet<GrupoCliente> GrupoCliente => Set<GrupoCliente>();
+        public DbSet<Venta> Venta => Set<Venta>();
+        public DbSet<VentaDetalle> VentaDetalle => Set<VentaDetalle>();
 
         public ApplicationDbContext() : base()
         {            
@@ -27,6 +34,8 @@ namespace M7Tarea1.Server.Data
             modelBuilder.Entity<GrupoProducto>(BuildGrupoProducto);
             modelBuilder.Entity<Producto>(BuildProducto);
             modelBuilder.Entity<Proveedor>(BuildProveedor);
+            modelBuilder.Entity<GrupoCliente>(BuildGrupoCliente);
+            modelBuilder.Entity<Cliente>().UseTpcMappingStrategy();
             modelBuilder.Entity<Persona>(BuildPersona);
             modelBuilder.Entity<Empresa>(BuildEmpresa);
             modelBuilder.Entity<Venta>(BuildVenta);
@@ -86,10 +95,23 @@ namespace M7Tarea1.Server.Data
             entityBuilder.Property(p => p.cNmbProveedor).HasColumnType("nvarchar(100)").IsRequired();
         }
         #endregion
+
+        #region Grupo Cliente Mapping
+        private void BuildGrupoCliente(EntityTypeBuilder<GrupoCliente> entityBuilder)
+        {
+            entityBuilder.ToTable("GrupoCliente");
+            entityBuilder.HasKey(gp => gp.Id);
+            entityBuilder.Property(gp => gp.Codigo).HasColumnType("nvarchar(25)").IsRequired();
+            entityBuilder.Property(gp => gp.Nombre).HasColumnType("nvarchar(100)").IsRequired();
+            entityBuilder.Property(gp => gp.Descuento).HasColumnType("decimal(4,2)");
+        }
+        #endregion
+
         #region Persona Mapping
         private void BuildPersona(EntityTypeBuilder<Persona> entityBuilder) {
-            entityBuilder.ToTable("ClientePersonas");
-            entityBuilder.HasKey(p => p.Id);
+            entityBuilder.ToTable("Personas");
+            //entityBuilder.HasKey(p => p.Id);
+            //entityBuilder.Property(p => p.Id).HasColumnName("PersonaId");
             entityBuilder.Property(p => p.Codigo).HasColumnType("nvarchar(25)").IsRequired();
             entityBuilder.Property(p => p.Email).HasColumnType("nvarchar(100)");
             entityBuilder.Property(p => p.Nombre).HasColumnType("nvarchar(50)").IsRequired();
@@ -98,14 +120,12 @@ namespace M7Tarea1.Server.Data
         }
         #endregion
 
-        #region GrupoCliente Mapping
-        #endregion
-
         #region Empresa Mapping
         private void BuildEmpresa(EntityTypeBuilder<Empresa> entityBuilder)
         {
-            entityBuilder.ToTable("ClienteEmpresas");
-            entityBuilder.HasKey(e => e.Id);
+            entityBuilder.ToTable("Empresas");
+            //entityBuilder.HasKey(e => e.Id);
+            //entityBuilder.Property(p => p.Id).HasColumnName("EmpresaId");
             entityBuilder.Property(e => e.Codigo).HasColumnType("nvarchar(25)").IsRequired();
             entityBuilder.Property(e => e.Email).HasColumnType("nvarchar(100)");
             entityBuilder.Property(e => e.RazonSocial).HasColumnType("nvarchar(100)").IsRequired();
