@@ -13,51 +13,49 @@ namespace M7Tarea1.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VentasController : ControllerBase
+    public class DescuentosController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private ServicioVenta _servicioVenta;
+        private ServicioDescuento _servicioDescuento;
 
-        public VentasController(ApplicationDbContext context, ServicioVenta servicioVenta)
+        public DescuentosController(ApplicationDbContext context, ServicioDescuento servicioDescuento)
         {
             _context = context;
-            _servicioVenta = servicioVenta;
+            _servicioDescuento = servicioDescuento;
         }
 
-        // GET: api/Ventas
+        // GET: api/Descuentoes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Venta>>> GetVenta()
+        public async Task<ActionResult<IEnumerable<Descuento>>> GetDescuento()
         {
-            return await _context.Venta
-                .Include(v => v.VentaDetalle)
-                .ToListAsync();
+            return await _context.Descuento.ToListAsync();
         }
 
-        // GET: api/Ventas/5
+        // GET: api/Descuentoes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Venta>> GetVenta(int id)
+        public async Task<ActionResult<Descuento>> GetDescuento(int id)
         {
-            var venta = await _context.Venta.FindAsync(id);
+            var descuento = await _context.Descuento.FindAsync(id);
 
-            if (venta == null)
+            if (descuento == null)
             {
                 return NotFound();
             }
 
-            return venta;
+            return descuento;
         }
 
-        // PUT: api/Ventas/5
+        // PUT: api/Descuentoes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVenta(int id, Venta venta)
+        public async Task<IActionResult> PutDescuento(int id, Descuento descuento)
         {
-            if (id != venta.Id)
+            if (id != descuento.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(venta).State = EntityState.Modified;
+            _context.Entry(descuento).State = EntityState.Modified;
 
             try
             {
@@ -65,7 +63,7 @@ namespace M7Tarea1.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VentaExists(id))
+                if (!DescuentoExists(id))
                 {
                     return NotFound();
                 }
@@ -78,35 +76,35 @@ namespace M7Tarea1.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Ventas
+        // POST: api/Descuentoes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Venta>> PostVenta(Venta venta)
+        public async Task<ActionResult<Descuento>> PostDescuento(Descuento descuento)
         {
-            await _servicioVenta.Registrar(venta);
+            await _servicioDescuento.Registrar(descuento);
 
-            return CreatedAtAction("GetVenta", new { id = venta.Id }, venta);
+            return CreatedAtAction("GetDescuento", new { id = descuento.Id }, descuento);
         }
 
-        // DELETE: api/Ventas/5
+        // DELETE: api/Descuentoes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVenta(int id)
+        public async Task<IActionResult> DeleteDescuento(int id)
         {
-            var venta = await _context.Venta.FindAsync(id);
-            if (venta == null)
+            var descuento = await _context.Descuento.FindAsync(id);
+            if (descuento == null)
             {
                 return NotFound();
             }
 
-            _context.Venta.Remove(venta);
+            _context.Descuento.Remove(descuento);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool VentaExists(int id)
+        private bool DescuentoExists(int id)
         {
-            return _context.Venta.Any(e => e.Id == id);
+            return _context.Descuento.Any(e => e.Id == id);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace M7Tarea1.Server.Data
         public DbSet<GrupoCliente> GrupoCliente => Set<GrupoCliente>();
         public DbSet<Venta> Venta => Set<Venta>();
         public DbSet<VentaDetalle> VentaDetalle => Set<VentaDetalle>();
+        public DbSet<Descuento> Descuento => Set<Descuento>();
 
         public ApplicationDbContext() : base()
         {            
@@ -42,6 +43,7 @@ namespace M7Tarea1.Server.Data
             modelBuilder.Entity<VentaDetalle>(BuildVentaDetalle);
             modelBuilder.Entity<Servicio>(BuildServicio);
             modelBuilder.Entity<Almacen>(BuildAlmacen);
+            modelBuilder.Entity<Descuento>(BuildDescuento);
         }
 
         #region Build Fabricante Mapping
@@ -103,7 +105,6 @@ namespace M7Tarea1.Server.Data
             entityBuilder.HasKey(gp => gp.Id);
             entityBuilder.Property(gp => gp.Codigo).HasColumnType("nvarchar(25)").IsRequired();
             entityBuilder.Property(gp => gp.Nombre).HasColumnType("nvarchar(100)").IsRequired();
-            entityBuilder.Property(gp => gp.Descuento).HasColumnType("decimal(4,2)");
         }
         #endregion
 
@@ -181,6 +182,17 @@ namespace M7Tarea1.Server.Data
             entityBuilder.HasKey(a => a.Id);
             entityBuilder.Property(a => a.Codigo).HasColumnType("nvarchar(25)").IsRequired();
             entityBuilder.Property(a => a.Direccion).HasColumnType("nvarchar(250)");
+        }
+        #endregion
+
+        #region Descuento Mapping
+        private void BuildDescuento(EntityTypeBuilder<Descuento> entityBuilder)
+        {
+            entityBuilder.ToTable("Descuentos");
+            entityBuilder.HasKey(d => d.Id);
+            entityBuilder.Property(d => d.PorcentajeDescuento).HasColumnType("decimal(4,2)").IsRequired();
+            entityBuilder.Property(d => d.FechaInicio).HasColumnType("Date");
+            entityBuilder.Property(d => d.FechaFin).HasColumnType("Date");
         }
         #endregion
 

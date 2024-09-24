@@ -24,6 +24,9 @@ builder.Services.AddScoped<ServicioGrupoProducto>();
 builder.Services.AddScoped<ServicioProducto>();
 builder.Services.AddScoped<ServicioProveedor>();
 
+builder.Services.AddScoped<ServicioVenta>();
+builder.Services.AddScoped<ServicioVentaDetalle>();
+
 var app = builder.Build();
 
 app.UseDefaultFiles();

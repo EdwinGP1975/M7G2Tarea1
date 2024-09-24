@@ -7,18 +7,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using M7Tarea1.Server.Data;
 using M7Tarea1.Server.Data.Models;
+using M7Tarea1.Server.Services;
 
 namespace M7Tarea1.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VentaDetallesController : ControllerBase
+    public class VentaDetalleController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private ServicioVentaDetalle _servicioVentaDetalle;
 
-        public VentaDetallesController(ApplicationDbContext context)
+        public VentaDetalleController(ApplicationDbContext context, ServicioVentaDetalle servicioVentaDetalle)
         {
             _context = context;
+            _servicioVentaDetalle = servicioVentaDetalle;
         }
 
         // GET: api/VentaDetalles
@@ -78,8 +81,7 @@ namespace M7Tarea1.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<VentaDetalle>> PostVentaDetalle(VentaDetalle ventaDetalle)
         {
-            _context.VentaDetalle.Add(ventaDetalle);
-            await _context.SaveChangesAsync();
+            await _servicioVentaDetalle.Registrar(ventaDetalle);
 
             return CreatedAtAction("GetVentaDetalle", new { id = ventaDetalle.Id }, ventaDetalle);
         }

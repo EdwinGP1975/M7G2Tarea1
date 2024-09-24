@@ -7,9 +7,9 @@
         public string Nombre { get; set; }
         public decimal Precio { get; set; }
         public string UnidadVenta { get; set; }
-        public int? VentaDetalleId { get; set; }
 
         //Navegacion
         public VentaDetalle? VentaDetalle { get; set; }
+        public Descuento? Descuento { get; set; }
     }
 }
