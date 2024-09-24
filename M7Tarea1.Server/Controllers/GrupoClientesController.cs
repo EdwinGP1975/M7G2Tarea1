@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using M7Tarea1.Server.Data;
 using M7Tarea1.Server.Data.Models;
+using M7Tarea1.Server.Services;
 
 namespace M7Tarea1.Server.Controllers
 {
@@ -15,10 +16,12 @@ namespace M7Tarea1.Server.Controllers
     public class GrupoClientesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private ServicioGrupoCliente _servicioGrupoCliente;
 
-        public GrupoClientesController(ApplicationDbContext context)
+        public GrupoClientesController(ApplicationDbContext context, ServicioGrupoCliente servicioGrupoCliente)
         {
             _context = context;
+            _servicioGrupoCliente = servicioGrupoCliente;
         }
 
         // GET: api/GrupoClientes
@@ -32,7 +35,7 @@ namespace M7Tarea1.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GrupoCliente>> GetGrupoCliente(int id)
         {
-            var grupoCliente = await _context.GrupoCliente.FindAsync(id);
+            var grupoCliente = await _servicioGrupoCliente.GetGrupoCliente(id);
 
             if (grupoCliente == null)
             {
@@ -78,8 +81,7 @@ namespace M7Tarea1.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<GrupoCliente>> PostGrupoCliente(GrupoCliente grupoCliente)
         {
-            _context.GrupoCliente.Add(grupoCliente);
-            await _context.SaveChangesAsync();
+            await _servicioGrupoCliente.Registrar(grupoCliente);
 
             return CreatedAtAction("GetGrupoCliente", new { id = grupoCliente.Id }, grupoCliente);
         }

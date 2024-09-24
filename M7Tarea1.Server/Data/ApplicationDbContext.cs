@@ -159,7 +159,7 @@ namespace M7Tarea1.Server.Data
             entityBuilder.Property(v => v.UnidadMedida).HasColumnType("nvarchar(50)").IsRequired();
             entityBuilder.Property(v => v.Precio).HasColumnType("decimal(8,2)").IsRequired();
             entityBuilder.Property(v => v.DescuentoItem).HasColumnType("decimal(4,2)");
-            entityBuilder.Property(v => v.PrecioDescuento).HasColumnType("decimal(8,2)");
+            entityBuilder.Property(v => v.PrecioDescuento).HasColumnType("decimal(8,2)");                
         }
         #endregion
 

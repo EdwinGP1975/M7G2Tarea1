@@ -35,7 +35,7 @@ namespace M7Tarea1.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Descuento>> GetDescuento(int id)
         {
-            var descuento = await _context.Descuento.FindAsync(id);
+            var descuento = await _servicioDescuento.GetDescuento(id);
 
             if (descuento == null)
             {

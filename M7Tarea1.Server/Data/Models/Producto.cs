@@ -81,9 +81,9 @@ namespace M7Tarea1.Server.Data.Models
         /// the Fabricante related to this Producto
         /// </summary>
         public Fabricante? Fabricante { get; set; }
-        public VentaDetalle? VentaDetalle { get; set; }
+        public ICollection<VentaDetalle>? VentaDetalle { get; set; }
         public ICollection<Almacen>? Almacenes { get; set; }
-        public Descuento? Descuento {  get; set; }
+        public ICollection<Descuento>? Descuento {  get; set; }
         #endregion
     }
 }

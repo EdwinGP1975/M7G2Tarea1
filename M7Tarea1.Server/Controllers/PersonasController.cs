@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using M7Tarea1.Server.Data;
 using M7Tarea1.Server.Data.Models;
+using M7Tarea1.Server.Services;
 
 namespace M7Tarea1.Server.Controllers
 {
@@ -15,10 +16,12 @@ namespace M7Tarea1.Server.Controllers
     public class PersonasController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private ServicioPersona _servicioPersona;
 
-        public PersonasController(ApplicationDbContext context)
+        public PersonasController(ApplicationDbContext context, ServicioPersona servicioPersona)
         {
             _context = context;
+            _servicioPersona = servicioPersona;
         }
 
         // GET: api/Personas
@@ -32,7 +35,7 @@ namespace M7Tarea1.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Persona>> GetPersona(int id)
         {
-            var persona = await _context.Persona.FindAsync(id);
+            var persona = await _servicioPersona.GetPersona(id);
 
             if (persona == null)
             {
@@ -78,8 +81,7 @@ namespace M7Tarea1.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Persona>> PostPersona(Persona persona)
         {
-            _context.Persona.Add(persona);
-            await _context.SaveChangesAsync();
+            await _servicioPersona.Registrar(persona);
 
             return CreatedAtAction("GetPersona", new { id = persona.Id }, persona);
         }

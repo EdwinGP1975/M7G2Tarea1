@@ -5,10 +5,7 @@
         public int Id { get; set; }
         public int Cantidad { get; set; }
         public string UnidadMedida { get; set; }
-        public decimal Precio {
-            get;// => Producto.nPrecioLista * Cantidad;
-            set;// => Precio = value;
-        }
+        public decimal Precio {get; set; }
         public decimal DescuentoItem { get; set; }
         public decimal PrecioDescuento { get; set; }
         public int VentaId { get; set; }

@@ -8,7 +8,7 @@
 
         //Navegacion
         public ICollection<Cliente>? Clientes { get; set; }
-        public Descuento? Descuento { get; set; }
+        public ICollection<Descuento>? Descuento { get; set; }
 
     }
 }

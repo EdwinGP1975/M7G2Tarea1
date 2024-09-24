@@ -9,7 +9,7 @@
         public string UnidadVenta { get; set; }
 
         //Navegacion
-        public VentaDetalle? VentaDetalle { get; set; }
+        public ICollection<VentaDetalle>? VentaDetalle { get; set; }
         public Descuento? Descuento { get; set; }
     }
 }

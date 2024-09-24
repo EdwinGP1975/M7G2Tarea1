@@ -9,7 +9,7 @@
 
         //Navegacion
         public GrupoCliente? GrupoCliente { get; set; }
-        public Venta? Venta { get; set; }
+        public ICollection<Venta>? Ventas { get; set; }
 
     }
 }

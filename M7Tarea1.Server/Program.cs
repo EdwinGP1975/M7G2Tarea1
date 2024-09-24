@@ -13,7 +13,9 @@ builder.Services.AddControllers()
     });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
+
 // Add ApplicationDbContrxt and SQL Server support
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -26,10 +28,14 @@ builder.Services.AddScoped<ServicioProveedor>();
 
 builder.Services.AddScoped<ServicioVenta>();
 builder.Services.AddScoped<ServicioVentaDetalle>();
+builder.Services.AddScoped<ServicioDescuento>();
+builder.Services.AddScoped<ServicioGrupoCliente>();
+builder.Services.AddScoped<ServicioPersona>();
 
 var app = builder.Build();
 
 app.UseDefaultFiles();
+
 app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.

@@ -7,31 +7,14 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  public forecasts: WeatherForecast[] = [];
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.getForecasts();
+
   }
 
-  getForecasts() {
-    this.http.get<WeatherForecast[]>('/api/weatherforecast').subscribe(
-      (result) => {
-        this.forecasts = result;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
 
   title = 'm7tare1 Home';
 }
 
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}

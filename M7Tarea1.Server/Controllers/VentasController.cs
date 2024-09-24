@@ -29,7 +29,7 @@ namespace M7Tarea1.Server.Controllers
         public async Task<ActionResult<IEnumerable<Venta>>> GetVenta()
         {
             return await _context.Venta
-                .Include(v => v.VentaDetalle)
+                //.Include(v => v.VentaDetalle)
                 .ToListAsync();
         }
 
@@ -37,7 +37,7 @@ namespace M7Tarea1.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Venta>> GetVenta(int id)
         {
-            var venta = await _context.Venta.FindAsync(id);
+            var venta = await _servicioVenta.GetVenta(id);
 
             if (venta == null)
             {

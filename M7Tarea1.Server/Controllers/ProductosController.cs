@@ -35,7 +35,7 @@ namespace M7Tarea1.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Producto>> GetProducto(int id)
         {
-            var producto = await _context.Productos.FindAsync(id);
+            var producto = await _servicioProducto.GetProducto(id); ;
 
             if (producto == null)
             {
