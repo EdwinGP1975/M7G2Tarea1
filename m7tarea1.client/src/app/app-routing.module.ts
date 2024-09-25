@@ -9,6 +9,8 @@ import { ProductosComponent } from './productos/productos.component';
 import { GrupoClienteComponent } from './grupo-cliente/grupo-cliente.component';
 import { DescuentosComponent } from './descuentos/descuentos.component';
 import { PersonasComponent } from './personas/personas.component';
+import { VentasComponent } from './ventas/ventas.component';
+import { VentaDetalleComponent } from './venta-detalle/venta-detalle.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -18,7 +20,10 @@ const routes: Routes = [
   { path: 'Productos', component: ProductosComponent },
   { path: 'GrupoClientes', component: GrupoClienteComponent },
   { path: 'Descuentos', component: DescuentosComponent },
-  { path: 'Personas', component: PersonasComponent }
+  { path: 'Personas', component: PersonasComponent },
+  { path: 'Ventas', component: VentasComponent },
+  { path: 'VentaDetalle', component: VentaDetalleComponent },
+  { path: 'VentaDetalle/:ventaId', component: VentaDetalleComponent }
 ];
 
 @NgModule({
