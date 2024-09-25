@@ -22,7 +22,8 @@ const routes: Routes = [
   { path: 'Descuentos', component: DescuentosComponent },
   { path: 'Personas', component: PersonasComponent },
   { path: 'Ventas', component: VentasComponent },
-  { path: 'VentaDetalle', component: VentaDetalleComponent }
+  { path: 'VentaDetalle', component: VentaDetalleComponent },
+  { path: 'VentaDetalle/:ventaId', component: VentaDetalleComponent }
 ];
 
 @NgModule({

@@ -10,7 +10,7 @@
 
   <ng-container matColumnDef="codigo">
     <th mat-header-cell *matHeaderCellDef>Codigo</th>
-    <td mat-cell *matCellDef="let venta">{{venta.codigo}}</td>
+    <td mat-cell *matCellDef="let venta"><a [routerLink]="['/VentaDetalle', venta.id]">{{venta.codigo}}</a></td>
   </ng-container>
 
   <ng-container matColumnDef="fecha">
