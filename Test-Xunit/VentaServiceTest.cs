@@ -134,7 +134,7 @@ namespace Test_Xunit
 
             Producto producto1 = new Producto()
             {
-                cSku = "100028",
+                cSku = "100022",
                 cNombre = "Audifonos2",
                 cNombreExtrangero = "Auriculares2",
                 nPeso = 180.1m,
@@ -143,21 +143,21 @@ namespace Test_Xunit
                 nPrecioLista = precioListaProducto,
                 cCodBarra = "2236541382",
                 cSkuFabricante = "MT56012",
-                cSkuAlternante = "13921013",
+                cSkuAlternante = "13921022",
             };
 
             Producto producto2 = new Producto()
             {
-                cSku = "100029",
-                cNombre = "Pantalla pc9",
-                cNombreExtrangero = "Monitor9",
+                cSku = "100023",
+                cNombre = "Pantalla pc3",
+                cNombreExtrangero = "Monitor3",
                 nPeso = 280.1m,
                 cUM = "Kg",
                 nPrecioBase = 142.0m,
                 nPrecioLista = precioListaProducto,
-                cCodBarra = "2236541179",
-                cSkuFabricante = "MT50019",
-                cSkuAlternante = "13604029",
+                cCodBarra = "2236541173",
+                cSkuFabricante = "MT50013",
+                cSkuAlternante = "13604033",
             };
 
             await controllerProducto.PostProducto(producto1);
@@ -170,9 +170,9 @@ namespace Test_Xunit
 
             var venta = new Venta
             {
-                Codigo = "V129",
+                Codigo = "V123",
                 Fecha = DateOnly.FromDateTime(DateTime.Now),
-                NitFacturacion = 12345679,
+                NitFacturacion = 12345678,
                 NombreFacturacion = "Cliente sin IVA",
                 ConIva = false,
                 PrecioTotalIva = 0,
@@ -202,7 +202,7 @@ namespace Test_Xunit
             {
                 VentaId = venta.Id,
                 ProductoId = producto2.Id,
-                Cantidad = 2,
+                Cantidad = 1,
                 UnidadMedida = "unidad",
                 Precio = 0,
                 DescuentoItem = 0,
@@ -215,7 +215,7 @@ namespace Test_Xunit
             // Assert: verificamos la venta y sus detalles
             var ventaRegistrada = await context.Venta.FindAsync(venta.Id);
             Assert.NotNull(ventaRegistrada);
-            Assert.Equal(venta.ConIva, ventaRegistrada.ConIva);
+            Assert.Equal(venta.ConIva, ventaRegistrada.ConIva);// conIVa false
             Assert.Equal(venta.PrecioTotal, ventaRegistrada.PrecioTotal);
 
             var detalles = context.VentaDetalle.Where(vd => vd.VentaId == venta.Id).ToList();
