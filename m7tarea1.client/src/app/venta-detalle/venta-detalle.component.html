@@ -1,0 +1,49 @@
+<h1 id="tableLabel">Venta Detalle</h1>
+
+<br />
+<br />
+<table mat-table [dataSource]="ventaDetalle" class="mat-elevation-z8" [hidden]="!ventaDetalle">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let venta">{{venta.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="cantidad">
+    <th mat-header-cell *matHeaderCellDef>cantidad</th>
+    <td mat-cell *matCellDef="let venta">{{venta.cantidad}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="unidadMedida">
+    <th mat-header-cell *matHeaderCellDef>Unidad Medida</th>
+    <td mat-cell *matCellDef="let venta">{{venta.unidadMedida}}</td>
+  </ng-container>
+  <ng-container matColumnDef="precio">
+    <th mat-header-cell *matHeaderCellDef>Precio</th>
+    <td mat-cell *matCellDef="let venta">{{venta.precio}}</td>
+  </ng-container>
+  <ng-container matColumnDef="descuentoItem">
+    <th mat-header-cell *matHeaderCellDef>Descuento %</th>
+    <td mat-cell *matCellDef="let venta">{{venta.descuentoItem}}</td>
+  </ng-container>
+  <ng-container matColumnDef="precioDescuento">
+    <th mat-header-cell *matHeaderCellDef>Precio Descuento</th>
+    <td mat-cell *matCellDef="let venta">{{venta.precioDescuento}}</td>
+  </ng-container>
+  <ng-container matColumnDef="ventaId">
+    <th mat-header-cell *matHeaderCellDef>Venta ID</th>
+    <td mat-cell *matCellDef="let venta">{{venta.ventaId}}</td>
+  </ng-container>
+  <ng-container matColumnDef="productoId">
+    <th mat-header-cell *matHeaderCellDef>Producto ID</th>
+    <td mat-cell *matCellDef="let venta">{{venta.productoId}}</td>
+  </ng-container>
+  <ng-container matColumnDef="servicioId">
+    <th mat-header-cell *matHeaderCellDef>Servicio ID</th>
+    <td mat-cell *matCellDef="let venta">{{venta.servicioId}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
+</table>
+
+<mat-paginator [hidden]="!ventaDetalle" [pageSize]="10" [pageSizeOptions]="[10,20,50]" showFirstLastButtons></mat-paginator>

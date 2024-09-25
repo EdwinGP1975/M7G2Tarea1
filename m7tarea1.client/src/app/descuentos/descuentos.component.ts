@@ -12,7 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class DescuentosComponent {
   //table
-  public displayedColumns: string[] = ['id', 'porcentajeDescuento', 'fechaInicio', 'fechaFin'];
+  public displayedColumns: string[] = ['id', 'porcentajeDescuento', 'fechaInicio', 'fechaFin','productoId', 'grupoClienteId'];
   public descuentos!: MatTableDataSource<Descuentos>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -44,4 +44,6 @@ interface Descuentos {
   porcentajeDescuento: string;
   fechaInicio: string;
   fechaFin: string;
+  productoId: string;
+  grupoClienteId: string
 }

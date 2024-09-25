@@ -1,1 +1,58 @@
-<p>ventas works!</p>
+<h1 id="tableLabel">Ventas</h1>
+
+<br />
+<br />
+<table mat-table [dataSource]="ventas" class="mat-elevation-z8" [hidden]="!ventas">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let venta">{{venta.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="codigo">
+    <th mat-header-cell *matHeaderCellDef>Codigo</th>
+    <td mat-cell *matCellDef="let venta">{{venta.codigo}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fecha">
+    <th mat-header-cell *matHeaderCellDef>Fecha</th>
+    <td mat-cell *matCellDef="let venta">{{venta.fecha}}</td>
+  </ng-container>
+  <ng-container matColumnDef="nitFacturacion">
+    <th mat-header-cell *matHeaderCellDef>Nit</th>
+    <td mat-cell *matCellDef="let venta">{{venta.nitFacturacion}}</td>
+  </ng-container>
+  <ng-container matColumnDef="nombreFacturacion">
+    <th mat-header-cell *matHeaderCellDef>Nombre Facturacion</th>
+    <td mat-cell *matCellDef="let venta">{{venta.nombreFacturacion}}</td>
+  </ng-container>
+  <ng-container matColumnDef="conIva">
+    <th mat-header-cell *matHeaderCellDef>Iva</th>
+    <td mat-cell *matCellDef="let venta">{{venta.conIva}}</td>
+  </ng-container>
+  <ng-container matColumnDef="descuentoGlobal">
+    <th mat-header-cell *matHeaderCellDef>Descuento Global</th>
+    <td mat-cell *matCellDef="let venta">{{venta.descuentoGlobal}}</td>
+  </ng-container>
+  <ng-container matColumnDef="precioTotal">
+    <th mat-header-cell *matHeaderCellDef>Precio Total</th>
+    <td mat-cell *matCellDef="let venta">{{venta.precioTotal}}</td>
+  </ng-container>
+  <ng-container matColumnDef="precioTotalDescuento">
+    <th mat-header-cell *matHeaderCellDef>Precio Total Descuento</th>
+    <td mat-cell *matCellDef="let venta">{{venta.precioTotalDescuento}}</td>
+  </ng-container>
+  <ng-container matColumnDef="personaId">
+    <th mat-header-cell *matHeaderCellDef>Persona ID</th>
+    <td mat-cell *matCellDef="let venta">{{venta.personaId}}</td>
+  </ng-container>
+  <ng-container matColumnDef="empresaId">
+    <th mat-header-cell *matHeaderCellDef>Empresa ID</th>
+    <td mat-cell *matCellDef="let venta">{{venta.empresaId}}</td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
+</table>
+
+<mat-paginator [hidden]="!ventas" [pageSize]="10" [pageSizeOptions]="[10,20,50]" showFirstLastButtons></mat-paginator>
