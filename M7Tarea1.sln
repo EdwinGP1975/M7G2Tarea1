@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M7Tarea1.Server", "M7Tarea1
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "m7tarea1.client", "m7tarea1.client\m7tarea1.client.esproj", "{EA2128D4-5B73-4DBA-9790-71E40E234DDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test-Xunit", "Test-Xunit\Test-Xunit.csproj", "{4096E65E-851E-4C20-BF3E-D5844EC0A2D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test-Xunit", "Test-Xunit\Test-Xunit.csproj", "{4096E65E-851E-4C20-BF3E-D5844EC0A2D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

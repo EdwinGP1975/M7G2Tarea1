@@ -9,6 +9,8 @@
         public string NombreFacturacion { get; set; }
         public bool ConIva { get; set; }
         public decimal? DescuentoGlobal { get; set; }
+        public decimal? PrecioIva { get; set; }
+        public decimal? PrecioTotalIva { get; set; }
         public decimal? PrecioTotal { get; set; }
         //precio total despues de aplicar el descuento global
         public decimal? PrecioTotalDescuento {  get; set; }

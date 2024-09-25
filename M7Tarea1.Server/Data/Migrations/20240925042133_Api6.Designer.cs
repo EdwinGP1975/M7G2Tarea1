@@ -4,6 +4,7 @@ using M7Tarea1.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace M7Tarea1.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240925042133_Api6")]
+    partial class Api6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -340,9 +343,6 @@ namespace M7Tarea1.Server.Data.Migrations
 
                     b.Property<decimal?>("PrecioTotalDescuento")
                         .HasColumnType("decimal(8,2)");
-
-                    b.Property<decimal?>("PrecioTotalIva")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 

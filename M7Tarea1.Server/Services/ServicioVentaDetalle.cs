@@ -32,6 +32,13 @@ namespace M7Tarea1.Server.Services
             ventaDetalle.Venta.PrecioTotal = CalcularPrecioTotalVenta(ventaDetalle.PrecioDescuento, (decimal)ventaDetalle.Venta.PrecioTotal);
 
             ventaDetalle.Venta.PrecioTotalDescuento = CalcularPrecioTotalDescuentoVenta((decimal)ventaDetalle.Venta.PrecioTotal, (decimal)ventaDetalle.Venta.DescuentoGlobal);
+
+
+            //Impuestos
+            ventaDetalle.Venta.PrecioIva = (ventaDetalle.Venta.ConIva) ? ventaDetalle.Venta.PrecioTotalDescuento * (13 / 100) : 0;
+            ventaDetalle.Venta.PrecioTotalIva = ventaDetalle.Venta.PrecioTotalDescuento + ventaDetalle.Venta.PrecioIva;
+
+
             _context.VentaDetalle.Add(ventaDetalle);
             await _context.SaveChangesAsync();
         }

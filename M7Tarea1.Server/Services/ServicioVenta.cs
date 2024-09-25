@@ -32,7 +32,7 @@ namespace M7Tarea1.Server.Services
                 Persona persona = _servicioPersona.GetPersona((int)venta.PersonaId).Result;
                 venta.Persona = persona;
                 venta.DescuentoGlobal = VerificarDescuentoGrupoCliente(venta);
-            }           
+            }
             
             _context.Venta.Add(venta);
             await _context.SaveChangesAsync();
