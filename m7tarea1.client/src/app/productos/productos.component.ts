@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-productos',
@@ -8,7 +11,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './productos.component.scss'
 })
 export class ProductosComponent {
-  public productos: Productos[] = [];
+  //table
+  public displayedColumns: string[] = ['id', 'sku', 'nombre', 'nombreExtrangero', 'peso', 'um', 'precioBase'
+    , 'precioBase', 'codigoBarra','skuFabricante','skuAlternante','grupoProductoId','fabricanteId'  ];
+  public productos!: MatTableDataSource<Productos>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+ // public productos: Productos[] = [];
   public showNew = false;
   public formRegister: FormGroup;
 
@@ -22,14 +31,15 @@ export class ProductosComponent {
   }
 
   get() {
-    this.http.get<Productos[]>('/api/Productos').subscribe(
-      (result) => {
-        this.productos = result;
+    this.http.get<Productos[]>('/api/Productos').subscribe({
+      next: (result) => {
+        this.productos = new MatTableDataSource<Productos>(result);
+        this.productos.paginator = this.paginator;
       },
-      (error) => {
+      error: (error) => {
         console.error(error);
       }
-    );
+    });
   }
   openBlockNew() {
     this.showNew = true;

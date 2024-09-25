@@ -4,7 +4,36 @@
       home
     </mat-icon>
   </button>
-  <a mat-flat-button color="primary" [routerLink]="['/Fabricantes']">
+  <buton mat-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </buton>
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item color="primary" [routerLink]="['/Fabricantes']">
+      Fabricantes
+    </a>
+    <a mat-menu-item color="primary" [routerLink]="['/GrupoProductos']">
+      Grupo Productos
+    </a>
+    <a mat-menu-item color="primary" [routerLink]="['/Productos']">
+      Productos
+    </a>
+    <a mat-menu-item color="primary" [routerLink]="['/Proveedores']">
+      Proveedores
+    </a>
+    <a mat-menu-item color="primary" [routerLink]="['/GrupoClientes']">
+      Grupo Clientes
+    </a>
+    <a mat-menu-item color="primary" [routerLink]="['/Personas']">
+      Personas
+    </a>
+    <a mat-menu-item color="primary" [routerLink]="['/Descuentos']">
+      Descuentos
+    </a>
+  </mat-menu>
+
+  
+  
+  <!--<a mat-flat-button color="primary" [routerLink]="['/Fabricantes']">
     Fabricantes
   </a>
   <a mat-flat-button color="primary" [routerLink]="['/GrupoProductos']">
@@ -15,5 +44,5 @@
   </a>
   <a mat-flat-button color="primary" [routerLink]="['/Proveedores']">
     Proveedores
-  </a>
+  </a>-->
 </mat-toolbar>

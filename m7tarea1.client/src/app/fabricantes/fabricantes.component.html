@@ -8,11 +8,15 @@
     <label for="cNmbFabricante">Nombre Fabricante : </label>
     <input type="text" [formControl]="formRegister.controls['cNmbFabricante']">
   </form>
+  <br />
+  <br />
   <button class="registrar" (click)="registrar()">
     Registrar
   </button>
 </div>
-<table *ngIf="fabricantes">
+<br />
+<br />
+<!--<table *ngIf="fabricantes">
   <thead>
     <tr>
       <th>Id</th>
@@ -26,3 +30,21 @@
     </tr>
   </tbody>
 </table>
+<br/>
+<br />-->
+<table mat-table [dataSource]="fabricantes" class="mat-elevation-z8" [hidden]="!fabricantes">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let fabricante">{{fabricante.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef="let fabricante">{{fabricante.cNmbFabricante}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
+</table>
+
+<mat-paginator [hidden]="!fabricantes" [pageSize]="10" [pageSizeOptions]="[10,20,50]" showFirstLastButtons></mat-paginator>

@@ -1,13 +1,21 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 @Component({
   selector: 'app-fabricantes',
   templateUrl: './fabricantes.component.html',
   styleUrl: './fabricantes.component.scss',
 })
 export class FabricantesComponent {
-  public fabricantes: Fabricantes[] = [];
+  //table
+  public displayedColumns: string[] = ['id', 'nombre'];
+  public fabricantes!: MatTableDataSource<Fabricantes>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  //public fabricantes: Fabricantes[] = [];
   public showNew = false;
   public formRegister: FormGroup = this.fb.group({
     cNmbFabricante: [null]
@@ -24,14 +32,15 @@ export class FabricantesComponent {
   }
 
   get() {
-    this.http.get<Fabricantes[]>('/api/Fabricantes').subscribe(
-      (result) => {
-        this.fabricantes = result;
+    this.http.get<Fabricantes[]>('/api/Fabricantes').subscribe({
+      next: (result) => {
+        this.fabricantes = new MatTableDataSource<Fabricantes>(result);
+        this.fabricantes.paginator = this.paginator;
       },
-      (error) => {
-        console.error(error);
+      error: (error) => {
+      console.error(error);
       }
-    );
+    });
   }
   openBlockNew() {
     this.showNew = true;

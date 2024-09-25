@@ -1,0 +1,40 @@
+<h1 id="tableLabel">Personas</h1>
+
+<br />
+<br />
+<table mat-table [dataSource]="personas" class="mat-elevation-z8" [hidden]="!personas">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let persona">{{persona.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="codigo">
+    <th mat-header-cell *matHeaderCellDef>Codigo</th>
+    <td mat-cell *matCellDef="let persona">{{persona.codigo}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef="let persona">{{persona.nombre}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="apellidos">
+    <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+    <td mat-cell *matCellDef="let persona">{{persona.apellidos}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let persona">{{persona.email}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="grupoClienteId">
+    <th mat-header-cell *matHeaderCellDef>Grupo Cliente ID</th>
+    <td mat-cell *matCellDef="let persona">{{persona.grupoClienteId}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
+</table>
+
+<mat-paginator [hidden]="!personas" [pageSize]="10" [pageSizeOptions]="[10,20,50]" showFirstLastButtons></mat-paginator>

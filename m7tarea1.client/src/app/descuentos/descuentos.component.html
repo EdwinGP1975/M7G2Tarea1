@@ -1,0 +1,30 @@
+<h1 id="tableLabel">Descuentos</h1>
+
+<br />
+<br />
+<table mat-table [dataSource]="descuentos" class="mat-elevation-z8" [hidden]="!descuentos">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let descuento">{{descuento.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="porcentajeDescuento">
+    <th mat-header-cell *matHeaderCellDef>Descuento %</th>
+    <td mat-cell *matCellDef="let descuento">{{descuento.porcentajeDescuento}}%</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fechaInicio">
+    <th mat-header-cell *matHeaderCellDef>Fecha Inicio</th>
+    <td mat-cell *matCellDef="let descuento">{{descuento.fechaInicio}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fechaFin">
+    <th mat-header-cell *matHeaderCellDef>Fecha Fin</th>
+    <td mat-cell *matCellDef="let descuento">{{descuento.fechaFin}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
+</table>
+
+<mat-paginator [hidden]="!descuentos" [pageSize]="10" [pageSizeOptions]="[10,20,50]" showFirstLastButtons></mat-paginator>

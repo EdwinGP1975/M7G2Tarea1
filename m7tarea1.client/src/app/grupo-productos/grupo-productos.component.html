@@ -19,7 +19,7 @@
     Registrar
   </button>
 </div>
-<table *ngIf="grupoProductos">
+<!--<table *ngIf="grupoProductos">
   <thead>
     <tr>
       <th>Id</th>
@@ -34,4 +34,28 @@
       <td>{{ grupoProd.cNombreGrupoProducto }}</td>
     </tr>
   </tbody>
+</table>-->
+<br />
+<br />
+<table mat-table [dataSource]="grupoProductos" class="mat-elevation-z8" [hidden]="!grupoProductos">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let grupo">{{grupo.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="codigo">
+    <th mat-header-cell *matHeaderCellDef>Codigo</th>
+    <td mat-cell *matCellDef="let grupo">{{grupo.cCodGrupoProducto}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef="let grupo">{{grupo.cNombreGrupoProducto}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
 </table>
+
+<mat-paginator [hidden]="!grupoProductos" [pageSize]="10" [pageSizeOptions]="[10,20,50]" showFirstLastButtons></mat-paginator>
+

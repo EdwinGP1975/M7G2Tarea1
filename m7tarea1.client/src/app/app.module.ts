@@ -15,6 +15,10 @@ import { GrupoProductosComponent } from './grupo-productos/grupo-productos.compo
 import { ProductosComponent } from './productos/productos.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { GrupoClienteComponent } from './grupo-cliente/grupo-cliente.component';
+import { PersonasComponent } from './personas/personas.component';
+import { DescuentosComponent } from './descuentos/descuentos.component';
+import { VentasComponent } from './ventas/ventas.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
     GrupoProductosComponent,
     ProductosComponent,
     ProveedoresComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    GrupoClienteComponent,
+    PersonasComponent,
+    DescuentosComponent,
+    VentasComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
@@ -32,7 +40,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    AngularMaterialModule
+    AngularMaterialModule    
   ],
   providers: [],
   bootstrap: [AppComponent]

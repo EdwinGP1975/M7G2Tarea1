@@ -75,7 +75,7 @@
     Registrar
   </button>
 </div>
-<table *ngIf="productos">
+<!--<table *ngIf="productos">
   <thead>
     <tr>
       <th>Id</th>
@@ -90,30 +90,104 @@
       <th>Sku Fabricante</th>
       <th>Sku Alternante</th>
       <th>grupo Producto Id</th>
-      <th>fabricanteId</th>
-      <!--<th>grupoProducto</th>
-      <th>proveedores</th>
-      <th>fabricante</th>-->
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let producto of productos">
-      <td>{{ producto.id }}</td>
-      <td>{{ producto.cSku }}</td>
-      <td>{{ producto.cNombre }}</td>
-      <td>{{ producto.cNombreExtrangero }}</td>
-      <td>{{ producto.nPeso }}</td>
-      <td>{{ producto.cUM }}</td>
-      <td>{{ producto.nPrecioLista }}</td>
-      <td>{{ producto.nPrecioBase }}</td>
-      <td>{{ producto.cCodBarra }}</td>
-      <td>{{ producto.cSkuFabricante }}</td>
-      <td>{{ producto.cSkuAlternante }}</td>
-      <td>{{ producto.grupoProductoId }}</td>
-      <td>{{ producto.fabricanteId }}</td>
-      <!--<td>{{ producto.grupoProducto }}</td>
-      <td>{{ producto.proveedores }}</td>
-      <td>{{ producto.fabricante }}</td>-->
-    </tr>
+      <th>fabricanteId</th>-->
+<!--<th>grupoProducto</th>
+<th>proveedores</th>
+<th>fabricante</th>-->
+<!--</tr>
+</thead>
+<tbody>
+  <tr *ngFor="let producto of productos">
+    <td>{{ producto.id }}</td>
+    <td>{{ producto.cSku }}</td>
+    <td>{{ producto.cNombre }}</td>
+    <td>{{ producto.cNombreExtrangero }}</td>
+    <td>{{ producto.nPeso }}</td>
+    <td>{{ producto.cUM }}</td>
+    <td>{{ producto.nPrecioLista }}</td>
+    <td>{{ producto.nPrecioBase }}</td>
+    <td>{{ producto.cCodBarra }}</td>
+    <td>{{ producto.cSkuFabricante }}</td>
+    <td>{{ producto.cSkuAlternante }}</td>
+    <td>{{ producto.grupoProductoId }}</td>
+    <td>{{ producto.fabricanteId }}</td>-->
+<!--<td>{{ producto.grupoProducto }}</td>
+<td>{{ producto.proveedores }}</td>
+<td>{{ producto.fabricante }}</td>-->
+<!--</tr>
   </tbody>
+</table>-->
+
+<br />
+<br />
+<table mat-table [dataSource]="productos" class="mat-elevation-z8" [hidden]="!productos">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let producto">{{producto.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="sku">
+    <th mat-header-cell *matHeaderCellDef>Sku</th>
+    <td mat-cell *matCellDef="let producto">{{producto.cSku}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef="let producto">{{producto.cNombre}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="nombreExtrangero">
+    <th mat-header-cell *matHeaderCellDef>Nombre Extrangero</th>
+    <td mat-cell *matCellDef="let producto">{{producto.cNombreExtrangero}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="peso">
+    <th mat-header-cell *matHeaderCellDef>Peso</th>
+    <td mat-cell *matCellDef="let producto">{{producto.nPeso}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="um">
+    <th mat-header-cell *matHeaderCellDef>UM</th>
+    <td mat-cell *matCellDef="let producto">{{producto.cUM}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="precioBase">
+    <th mat-header-cell *matHeaderCellDef>Precio Base</th>
+    <td mat-cell *matCellDef="let producto">{{producto.nPrecioBase}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="precioLista">
+    <th mat-header-cell *matHeaderCellDef>Precio Lista</th>
+    <td mat-cell *matCellDef="let producto">{{producto.nPrecioLista}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="codigoBarra">
+    <th mat-header-cell *matHeaderCellDef>Codigo Barra</th>
+    <td mat-cell *matCellDef="let producto">{{producto.cCodBarra}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="skuFabricante">
+    <th mat-header-cell *matHeaderCellDef>Sku Fabricante</th>
+    <td mat-cell *matCellDef="let producto">{{producto.cSkuFabricante}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="skuAlternante">
+    <th mat-header-cell *matHeaderCellDef>Sku Alternante</th>
+    <td mat-cell *matCellDef="let producto">{{producto.cSkuAlternante}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="grupoProductoId">
+    <th mat-header-cell *matHeaderCellDef>Grupo Producto ID</th>
+    <td mat-cell *matCellDef="let producto">{{producto.grupoProductoId}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fabricanteId">
+    <th mat-header-cell *matHeaderCellDef>Fabricante ID</th>
+    <td mat-cell *matCellDef="let producto">{{producto.fabricanteId}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
 </table>
+
+<mat-paginator [hidden]="!productos" [pageSize]="10" [pageSizeOptions]="[10,20,50]" showFirstLastButtons></mat-paginator>

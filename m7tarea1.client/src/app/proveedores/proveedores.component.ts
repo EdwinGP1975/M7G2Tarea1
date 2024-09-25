@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-proveedores',
@@ -8,7 +11,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './proveedores.component.scss'
 })
 export class ProveedoresComponent {
-  public proveedores: Proveedores[] = [];
+  //table
+  public displayedColumns: string[] = ['id', 'nombre', 'productoId'];
+  public proveedores!: MatTableDataSource<Proveedores>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  //public proveedores: Proveedores[] = [];
   public showNew = false;
   public formRegister: FormGroup;
   constructor(private http: HttpClient,
@@ -21,14 +29,15 @@ export class ProveedoresComponent {
   }
 
   get() {
-    this.http.get<Proveedores[]>('/api/Proveedores').subscribe(
-      (result) => {
-        this.proveedores = result;
+    this.http.get<Proveedores[]>('/api/Proveedores').subscribe({
+      next: (result) => {
+        this.proveedores = new MatTableDataSource<Proveedores>(result);
+        this.proveedores.paginator = this.paginator;
       },
-      (error) => {
+      error: (error) => {
         console.error(error);
       }
-    );
+    });
   }
   openBlockNew() {
     this.showNew = true;
