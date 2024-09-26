@@ -1,0 +1,64 @@
+<div class="venta-edit">
+  <h1>{{title}}</h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Codigo:</mat-label>
+      <input matInput formControlName="codigo" required placeholder="100020" />
+      <mat-error *ngIf="form.controls['codigo'].errors?.['required']">Codigo es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Fecha:</mat-label>
+      <input matInput formControlName="fecha" required placeholder=" 2024-09-25" />
+      <mat-error *ngIf="form.controls['fecha'].errors?.['required']">Fecha es requerida</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Nit Factura:</mat-label>
+      <input matInput formControlName="nitFactura" required placeholder="123123123" />
+      <mat-error *ngIf="form.controls['nitFactura'].errors?.['required']">Nit es requerido</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+
+      <mat-label>Nombre Factura:</mat-label>
+      <input matInput formControlName="nombreFactura" required placeholder="nombre" />
+      <mat-error *ngIf="form.controls['nombreFactura'].errors?.['required']">Nombre es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Con Iva:</mat-label>
+      <input matInput formControlName="conIva" required placeholder="Escribe true o false" />
+      <mat-error *ngIf="form.controls['conIva'].errors?.['required']">Con Iva es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Descuento Global:</mat-label>
+      <input matInput formControlName="descuentoGlobal" placeholder="% de descuento" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Precio Total:</mat-label>
+      <input matInput formControlName="precioTotal" placeholder="0.0" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Precio Total Descuento:</mat-label>
+      <input matInput formControlName="precioTotalDescuento" placeholder="0.0" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Persona Id:</mat-label>
+      <input matInput formControlName="personaId" placeholder="1" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Empresa Id:</mat-label>
+      <input matInput formControlName="empresaId" placeholder="1" />
+    </mat-form-field>
+
+    <div>
+      <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid">
+        Guardar
+      </button>
+      <button mat-flat-button color="secondary" [routerLink]="['/Ventas']">Cancelar</button>
+    </div>
+  </form>
+</div>

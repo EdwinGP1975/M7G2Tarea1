@@ -20,6 +20,7 @@ import { PersonasComponent } from './personas/personas.component';
 import { DescuentosComponent } from './descuentos/descuentos.component';
 import { VentasComponent } from './ventas/ventas.component';
 import { VentaDetalleComponent } from './venta-detalle/venta-detalle.component';
+import { VentaEditComponent } from './ventas/venta-edit.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { VentaDetalleComponent } from './venta-detalle/venta-detalle.component';
     PersonasComponent,
     DescuentosComponent,
     VentasComponent,
-    VentaDetalleComponent
+    VentaDetalleComponent,
+    VentaEditComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

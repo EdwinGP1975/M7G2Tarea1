@@ -147,6 +147,8 @@ namespace M7Tarea1.Server.Data
             entityBuilder.Property(v => v.DescuentoGlobal).HasColumnType("decimal(4,2)");
             entityBuilder.Property(v => v.PrecioTotal).HasColumnType("decimal(8,2)");
             entityBuilder.Property(v => v.PrecioTotalDescuento).HasColumnType("decimal(8,2)");
+            entityBuilder.Property(v => v.PrecioIva).HasColumnType("decimal(8,2)");
+            entityBuilder.Property(v => v.PrecioTotalIva).HasColumnType("decimal(8,2)");
         }
         #endregion
 

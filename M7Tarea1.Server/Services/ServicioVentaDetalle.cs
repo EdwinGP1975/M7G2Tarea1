@@ -35,8 +35,12 @@ namespace M7Tarea1.Server.Services
 
 
             //Impuestos
-            ventaDetalle.Venta.PrecioIva = (ventaDetalle.Venta.ConIva) ? ventaDetalle.Venta.PrecioTotalDescuento * (13 / 100) : 0;
-            ventaDetalle.Venta.PrecioTotalIva = ventaDetalle.Venta.PrecioTotalDescuento + ventaDetalle.Venta.PrecioIva;
+            ventaDetalle.Venta.PrecioIva = 0;
+            if (ventaDetalle.Venta.ConIva)
+            {
+                ventaDetalle.Venta.PrecioIva = CalcularIva((decimal)ventaDetalle.Venta.PrecioTotalDescuento, 13m);
+            }
+            ventaDetalle.Venta.PrecioTotalIva = (decimal)ventaDetalle.Venta.PrecioTotalDescuento + (decimal)ventaDetalle.Venta.PrecioIva;
 
 
             _context.VentaDetalle.Add(ventaDetalle);
@@ -75,6 +79,11 @@ namespace M7Tarea1.Server.Services
         private decimal CalcularPrecioTotalDescuentoVenta(decimal precio, decimal porcentajeDescuento)
         {
             return CalcularPrecioConDescuento(precio, porcentajeDescuento);
+        }
+
+        private decimal CalcularIva(decimal precio, decimal porcentajeIva)
+        {
+            return precio * porcentajeIva / 100;
         }
     }
 }

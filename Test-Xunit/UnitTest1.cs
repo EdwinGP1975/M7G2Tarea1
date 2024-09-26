@@ -42,6 +42,35 @@ namespace Test_Xunit
         }
 
         [Fact]
+        public async void RegistrarGrupoCliente()
+        {
+            // Arrange
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "M7G2")
+                .Options;
+            using var context = new ApplicationDbContext(options);
+            var servicioDescuento = new ServicioDescuento(context);
+
+            var servicioGrupoCliente = new ServicioGrupoCliente(context, servicioDescuento);
+
+            var controller = new GrupoClientesController(context, servicioGrupoCliente);
+
+            GrupoCliente grupoCliente = new GrupoCliente()
+            {
+                Codigo = "gc101",
+                Nombre = "Afiliados SIB"
+            };
+
+            // Act
+            var result = (await controller.PostGrupoCliente(grupoCliente)).Result;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal("gc101", grupoCliente.Codigo);
+        }
+
+
+        [Fact]
         public async void RegistrarGrupoProducto()
         {
             // Arrange
@@ -447,7 +476,7 @@ namespace Test_Xunit
             var resultRegistrarVentaDetalle = controllerVentaDetalle.PostVentaDetalle(ventaDetalle);
 
             decimal porcentajeDescuentoGrupoCliente = grupoCliente.Descuento.ElementAt(0).PorcentajeDescuento;
-            decimal precioTotalVenta = precioTotalProducto;
+            decimal precioTotalVenta = precioTotalProducto+1;
             decimal precioTotalVentaConDescuento = (decimal)(venta.PrecioTotal - (venta.PrecioTotal * porcentajeDescuentoGrupoCliente / 100));
 
             // Assert

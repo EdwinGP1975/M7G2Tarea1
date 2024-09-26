@@ -11,6 +11,7 @@ import { DescuentosComponent } from './descuentos/descuentos.component';
 import { PersonasComponent } from './personas/personas.component';
 import { VentasComponent } from './ventas/ventas.component';
 import { VentaDetalleComponent } from './venta-detalle/venta-detalle.component';
+import { VentaEditComponent } from './ventas/venta-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'Personas', component: PersonasComponent },
   { path: 'Ventas', component: VentasComponent },
   { path: 'VentaDetalle', component: VentaDetalleComponent },
-  { path: 'VentaDetalle/:ventaId', component: VentaDetalleComponent }
+  { path: 'VentaDetalle/:ventaId', component: VentaDetalleComponent },
+  { path: 'VentaEdit', component: VentaEditComponent }
 ];
 
 @NgModule({
