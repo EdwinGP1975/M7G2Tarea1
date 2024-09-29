@@ -427,7 +427,7 @@ namespace Test_Xunit
                 Nombre = "Luis",
                 Apellidos = "Pedrazas",
                 Ci = 2156321,
-                TipoDoc = "documento identidad",
+                TipoDocumento = "documento identidad",
                 GrupoClienteId = grupoCliente.Id,
             };
             var resultRegistrarPersona = controllerPersona.PostPersona(persona);
@@ -512,7 +512,7 @@ namespace Test_Xunit
                 Nombre = "Luis",
                 Apellidos = "Pedrazas",
                 Ci = 2156321,
-                TipoDoc = "documento identidad",
+                TipoDocumento = "documento identidad",
                 GrupoClienteId = grupoCliente.Id,
             };
 

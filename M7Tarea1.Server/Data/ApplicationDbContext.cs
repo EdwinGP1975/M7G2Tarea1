@@ -118,6 +118,7 @@ namespace M7Tarea1.Server.Data
             entityBuilder.Property(p => p.Nombre).HasColumnType("nvarchar(50)").IsRequired();
             entityBuilder.Property(p => p.Apellidos).HasColumnType("nvarchar(100)").IsRequired();
             entityBuilder.Property(p => p.Ci).HasColumnType("int");
+            entityBuilder.Property(p => p.TipoDocumento).HasColumnType("nvarchar(100)");
         }
         #endregion
 
