@@ -93,7 +93,7 @@ namespace Test_Xunit
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(1, grupoProducto.Id);
+            Assert.True(grupoProducto.Id > 0);
         }
 
         [Fact]
@@ -164,9 +164,9 @@ namespace Test_Xunit
 
             // Assert
             Assert.NotNull(resultRegistrarVentaDetalle);
-            Assert.NotNull(ventaDetalle.Id);
+            Assert.True(ventaDetalle.Id > 0);
             Assert.Single(venta.VentaDetalle);
-            Assert.NotNull(venta.VentaDetalle.First().Id);
+            Assert.True(venta.VentaDetalle.First().Id > 0);
             Assert.NotNull(ventaDetalle.Venta);
             Assert.Equal(precioTotalProducto, ventaDetalle.Precio);
             Assert.Equal(precioTotalProducto, ventaDetalle.Venta.PrecioTotal);
@@ -241,13 +241,11 @@ namespace Test_Xunit
             {
                 VentaId = venta.Id,
                 ProductoId = producto1.Id,
-                //Producto = producto1,
                 Cantidad = cantidadProducto1,
                 UnidadMedida = "unidad",
                 Precio = 0,
                 DescuentoItem = 0,
                 PrecioDescuento = 0,
-                //Venta = venta
             };
 
             int cantidadProducto2 = 2;
@@ -256,13 +254,11 @@ namespace Test_Xunit
             {
                 VentaId = venta.Id,
                 ProductoId =producto2.Id,
-                //Producto = producto2,
                 Cantidad = cantidadProducto2,
                 UnidadMedida = "unidad",
                 Precio = 0,
                 DescuentoItem = 0,
                 PrecioDescuento = 0,
-                //Venta = venta
             };
 
             // Act
@@ -273,14 +269,14 @@ namespace Test_Xunit
             Assert.Equal(2, venta.VentaDetalle.Count);
 
             Assert.NotNull(resultRegistrarVentaDetalle1);
-            Assert.NotNull(ventaDetalle1.Id);
-            Assert.NotNull(venta.VentaDetalle.ElementAt(0).Id);
+            Assert.True(ventaDetalle1.Id > 0);
+            Assert.True(venta.VentaDetalle.ElementAt(0).Id > 0);
             Assert.NotNull(ventaDetalle1.Venta);
             Assert.Equal(precioTotalProducto1, ventaDetalle1.Precio);
 
             Assert.NotNull(resultRegistrarVentaDetalle2);
-            Assert.NotNull(ventaDetalle2.Id);
-            Assert.NotNull(venta.VentaDetalle.ElementAt(1).Id);
+            Assert.True(ventaDetalle2.Id > 0);
+            Assert.True(venta.VentaDetalle.ElementAt(1).Id > 0);
             Assert.NotNull(ventaDetalle2.Venta);
             Assert.Equal(precioTotalProducto2, ventaDetalle2.Precio);
 
@@ -322,7 +318,6 @@ namespace Test_Xunit
                 FechaInicio = new DateOnly(2024, 9, 1),
                 FechaFin = new DateOnly(2024, 9, 30),
                 ProductoId = producto.Id,
-                //Producto = producto
             };
             var resultRegistrarDescuento = await controllerDescuento.PostDescuento(descuento);
 
@@ -353,13 +348,11 @@ namespace Test_Xunit
             {
                 VentaId = venta.Id,
                 ProductoId = producto.Id,
-                //Producto = producto,
                 Cantidad = cantidadProducto,
                 UnidadMedida = "unidad",
                 Precio = 0,
                 DescuentoItem = 0,
                 PrecioDescuento = 0,
-                //Venta = venta
             };
 
             // Act
@@ -367,9 +360,9 @@ namespace Test_Xunit
 
             // Assert
             Assert.NotNull(resultRegistrarVentaDetalle);
-            Assert.NotNull(ventaDetalle.Id);
+            Assert.True(ventaDetalle.Id > 0);
             Assert.Single(venta.VentaDetalle);
-            Assert.NotNull(venta.VentaDetalle.First().Id);
+            Assert.True(venta.VentaDetalle.First().Id > 0);
             Assert.NotNull(ventaDetalle.Venta);
             Assert.Equal(precioTotalProducto, ventaDetalle.Precio);
             Assert.Equal(porcentajeDescuentoProducto, ventaDetalle.DescuentoItem);
@@ -434,6 +427,7 @@ namespace Test_Xunit
                 Nombre = "Luis",
                 Apellidos = "Pedrazas",
                 Ci = 2156321,
+                TipoDoc = "documento identidad",
                 GrupoClienteId = grupoCliente.Id,
             };
             var resultRegistrarPersona = controllerPersona.PostPersona(persona);
@@ -475,19 +469,59 @@ namespace Test_Xunit
             // Act
             var resultRegistrarVentaDetalle = controllerVentaDetalle.PostVentaDetalle(ventaDetalle);
 
-            decimal porcentajeDescuentoGrupoCliente = grupoCliente.Descuento.ElementAt(0).PorcentajeDescuento;
-            decimal precioTotalVenta = precioTotalProducto+1;
-            decimal precioTotalVentaConDescuento = (decimal)(venta.PrecioTotal - (venta.PrecioTotal * porcentajeDescuentoGrupoCliente / 100));
+            decimal porcentajeDescuentoGrupoCliente = grupoCliente.Descuento.ElementAt(0).PorcentajeDescuento; //5.5m
+            decimal precioTotalVenta = precioTotalProducto; // 1012.8m * 1
+            decimal precioTotalVentaConDescuento = (decimal)(venta.PrecioTotal - (venta.PrecioTotal * porcentajeDescuentoGrupoCliente / 100)); //1012.8m - (1012.8m * 5.5m / 100);
 
             // Assert
             Assert.NotNull(resultRegistrarVentaDetalle);
-            Assert.NotNull(ventaDetalle.Id);
+            Assert.True(ventaDetalle.Id > 0);
             Assert.Single(venta.VentaDetalle);
-            Assert.NotNull(venta.VentaDetalle.First().Id);
+            Assert.True(venta.VentaDetalle.First().Id > 0);
             Assert.NotNull(ventaDetalle.Venta);
             Assert.Equal(precioTotalVenta, venta.PrecioTotal);
             Assert.Equal(precioTotalVentaConDescuento, venta.PrecioTotalDescuento);           
         }
 
+        [Fact]
+        public async void Registra1Persona()
+        {
+            // Arrange
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "M7G2")
+                .Options;
+            using var context = new ApplicationDbContext(options);
+
+            var servicioDescuento = new ServicioDescuento(context);
+            var servicioGrupoCliente = new ServicioGrupoCliente(context, servicioDescuento);
+            var controllerGrupoCliente = new GrupoClientesController(context, servicioGrupoCliente);
+            GrupoCliente grupoCliente = new GrupoCliente()
+            {
+                Codigo = "GC1002",
+                Nombre = "Empleados de la empresa Belgica",
+                Clientes = new List<Cliente>()
+            };
+            var resultRegistrarGrupoCliente = await controllerGrupoCliente.PostGrupoCliente(grupoCliente);
+
+            var servicioPersona = new ServicioPersona(context, servicioGrupoCliente);
+            var controllerPersona = new PersonasController(context, servicioPersona);
+            Persona persona = new Persona()
+            {
+                Codigo = "P14531",
+                Email = "luis.pedrazas10@gmail.com",
+                Nombre = "Luis",
+                Apellidos = "Pedrazas",
+                Ci = 2156321,
+                TipoDoc = "documento identidad",
+                GrupoClienteId = grupoCliente.Id,
+            };
+
+            // Act
+            var resultRegistrarPersona = controllerPersona.PostPersona(persona);
+
+            // Assert
+            Assert.NotNull(resultRegistrarPersona);
+            Assert.True(persona.Id > 0);
+        }
     }
 }

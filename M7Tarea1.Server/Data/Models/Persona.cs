@@ -5,5 +5,6 @@
         public string Nombre { get; set; }
         public string Apellidos { get; set; }
         public int Ci { get; set; }
+        public string TipoDoc { get; set; }
     }
 }
