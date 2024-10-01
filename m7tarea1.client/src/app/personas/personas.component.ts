@@ -12,7 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class PersonasComponent {
   //table
-  public displayedColumns: string[] = ['id', 'codigo', 'nombre', 'apellidos', 'email', 'grupoClienteId'];
+  public displayedColumns: string[] = ['id', 'codigo', 'nombre', 'apellidos', 'ci', 'tipoDocumento', 'email', 'grupoClienteId'];
   public personas!: MatTableDataSource<Personas>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -43,6 +43,8 @@ interface Personas {
   id: number;
   nombre: string;
   apellidos: string;
+  ci: number;
+  tipoDocumento: string;
   codigo: string;
   email: string;
   grupoClienteId: string;

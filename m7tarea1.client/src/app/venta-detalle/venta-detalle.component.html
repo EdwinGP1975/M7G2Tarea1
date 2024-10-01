@@ -1,7 +1,12 @@
 <h1 id="tableLabel">Venta Detalle</h1>
 
+<div *ngIf="!ventaDetalle">
+  <mat-spinner class="spinner" color="primary" mode="indeterminate"></mat-spinner>
+</div>
+
 <br />
 <br />
+
 <table mat-table [dataSource]="ventaDetalle" class="mat-elevation-z8" [hidden]="!ventaDetalle">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>ID</th>

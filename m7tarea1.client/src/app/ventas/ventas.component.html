@@ -1,8 +1,12 @@
 <h1 id="tableLabel">Ventas</h1>
 <!--<button mat-flat-button color="primary" class="btn-add" [routerLink]="['/VentaEdit']">Nuevo</button>-->
 
+<div *ngIf="!ventas">
+  <mat-spinner class="spinner" color="primary" mode="indeterminate"></mat-spinner>
+</div>
 <br />
 <br />
+
 <table mat-table [dataSource]="ventas" class="mat-elevation-z8" [hidden]="!ventas">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -29,6 +33,10 @@
   <ng-container matColumnDef="conIva">
     <th mat-header-cell *matHeaderCellDef>Iva</th>
     <td mat-cell *matCellDef="let venta">{{venta.conIva}}</td>
+  </ng-container>
+  <ng-container matColumnDef="formaPago">
+    <th mat-header-cell *matHeaderCellDef>Condicion Pago</th>
+    <td mat-cell *matCellDef="let venta">{{venta.formaPago}}</td>
   </ng-container>
   <ng-container matColumnDef="descuentoGlobal">
     <th mat-header-cell *matHeaderCellDef>Descuento Global</th>

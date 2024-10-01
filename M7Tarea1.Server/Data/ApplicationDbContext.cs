@@ -145,6 +145,7 @@ namespace M7Tarea1.Server.Data
             entityBuilder.Property(v => v.NitFacturacion).HasColumnType("int");
             entityBuilder.Property(v => v.NombreFacturacion).HasColumnType("nvarchar(100)").IsRequired();
             entityBuilder.Property(v => v.ConIva).HasColumnType("bit");
+            entityBuilder.Property(v => v.FormaPago).HasColumnType("nvarchar(150)").IsRequired();
             entityBuilder.Property(v => v.DescuentoGlobal).HasColumnType("decimal(4,2)");
             entityBuilder.Property(v => v.PrecioTotal).HasColumnType("decimal(8,2)");
             entityBuilder.Property(v => v.PrecioTotalDescuento).HasColumnType("decimal(8,2)");

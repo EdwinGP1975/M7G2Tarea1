@@ -13,7 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 export class VentasComponent {
   //table
   public displayedColumns: string[] = ['id', 'codigo', 'fecha', 'nitFacturacion', 'nombreFacturacion'
-    , 'conIva', 'descuentoGlobal', 'precioTotal', 'precioTotalDescuento','precioIva', 'precioTotalIva', 'personaId', 'empresaId'  ];
+    , 'conIva','formaPago', 'descuentoGlobal', 'precioTotal', 'precioTotalDescuento','precioIva', 'precioTotalIva', 'personaId', 'empresaId'  ];
   public ventas!: MatTableDataSource<Ventas>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -45,6 +45,7 @@ interface Ventas {
   nitFacturacion: string;
   nombreFacturacion: string;
   conIva: boolean;
+  formaPago: string;
   descuentoGlobal: string;
   precioTotal: string;
   precioTotalDescuento: string;
