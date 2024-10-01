@@ -13,21 +13,27 @@ import { MatPaginator } from '@angular/material/paginator';
 export class PersonasComponent {
   //table
   public displayedColumns: string[] = ['id', 'codigo', 'nombre', 'apellidos', 'ci', 'tipoDocumento', 'email', 'grupoClienteId'];
-  public personas!: MatTableDataSource<Personas>;
+  public personas!: MatTableDataSource<Persona>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private http: HttpClient) {
+  public showNew = false;
+  public formCliente: FormGroup;
+
+
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.get();
-    //this.initForm()
+    this.initForm();
   }
 
   get() {
-    this.http.get<Personas[]>('/api/Personas').subscribe({
+    this.http.get<Persona[]>('/api/Personas').subscribe({
       next: (result) => {
-        this.personas = new MatTableDataSource<Personas>(result);
+        this.personas = new MatTableDataSource<Persona>(result);
         this.personas.paginator = this.paginator;
       },
       error: (error) => {
@@ -36,10 +42,40 @@ export class PersonasComponent {
     });
   }
 
+  openBlockNew() {
+    this.showNew = true;
+    this.initForm();
+  }
+
+
+  initForm() {
+    this.formCliente = this.fb.group({
+      codigo: ['', [Validators.required, Validators.maxLength(10)]],
+      nombre: ['', [Validators.required, Validators.maxLength(100)]],
+      apellidos: ['', [Validators.required, Validators.maxLength(100)]],
+      ci: ['', [Validators.required, Validators.maxLength(12)]],
+      // nit: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      tipoDocumento: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      grupoClienteId: ['', [Validators.required, Validators.maxLength(3)]]
+    });
+  }
+
+  registrar() {
+    this.showNew = false;
+    const data = this.formCliente.getRawValue()
+    console.log('registrar', data);
+    this.http.post<Persona>('/api/Personas', data).subscribe({
+      next: (result) => {
+        console.log(result);
+        this.get();
+      }, error: (error) => console.log(error)
+    });
+  }
 
 }
 
-interface Personas {
+interface Persona {
   id: number;
   nombre: string;
   apellidos: string;

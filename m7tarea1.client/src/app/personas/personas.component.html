@@ -1,5 +1,99 @@
 <h1 id="tableLabel">Personas</h1>
-<button mat-flat-button color="primary" class="btn-add" [routerLink]="['/PersonaEdit']">Nuevo</button>
+<!--<button mat-flat-button color="primary" class="btn-add" [routerLink]="['/PersonaEdit']">Nuevo</button>-->
+
+<div class="text-right">
+  <button (click)="openBlockNew()" mat-flat-button color="primary" class="btn-add">Nuevo</button>
+</div>
+
+<div *ngIf="showNew" class="formulario">
+  <h4>Registrar Cliente</h4>
+  <form [formGroup]="formCliente" (ngSubmit)="registrar()">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Código (máximo 10 caracteres)</mat-label>
+      <input matInput formControlName="codigo" placeholder="Ingresa un código" maxlength="10" required>
+      <mat-hint align="end">{{formCliente.get('codigo')?.value?.length || 0}}/10</mat-hint>
+      <mat-error *ngIf="formCliente.get('codigo')?.hasError('required')">El código es requerido</mat-error>
+      <mat-error *ngIf="formCliente.get('codigo')?.hasError('maxlength')">Máximo 10 caracteres permitidos</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Cédula de identidad</mat-label>
+      <input matInput formControlName="ci" placeholder="Ingresa un código" maxlength="12" required>
+      <mat-hint align="end">{{formCliente.get('ci')?.value?.length || 0}}/12</mat-hint>
+      <mat-error *ngIf="formCliente.get('ci')?.hasError('required')">El código es requerido</mat-error>
+      <mat-error *ngIf="formCliente.get('ci')?.hasError('maxlength')">Máximo 12 caracteres permitidos</mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" placeholder="Ingresa su nombre" maxlength="100" required>
+      <mat-hint align="end">{{formCliente.get('nombre')?.value?.length || 0}}/100</mat-hint>
+      <mat-error *ngIf="formCliente.get('nombre')?.hasError('required')">El nombre es requerido</mat-error>
+      <mat-error *ngIf="formCliente.get('nombre')?.hasError('maxlength')">Máximo 100 caracteres permitidos</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Apellidos</mat-label>
+      <input matInput formControlName="apellidos" placeholder="Ingresa sus apellidos" maxlength="100" required>
+      <mat-hint align="end">{{formCliente.get('apellidos')?.value?.length || 0}}/100</mat-hint>
+      <mat-error *ngIf="formCliente.get('apellidos')?.hasError('required')">El nombre es requerido</mat-error>
+      <mat-error *ngIf="formCliente.get('apellidos')?.hasError('maxlength')">
+        Máximo 100 caracteres
+        permitidos
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Valor Numérico Entero
+  <mat-form-field appearance="fill">
+    <mat-label>NIT</mat-label>
+    <input matInput formControlName="nit" placeholder="Ingresa un valor" type="number" required>
+    <mat-error *ngIf="formCliente.get('nit')?.hasError('required')">El valor entero es requerido</mat-error>
+    <mat-error *ngIf="formCliente.get('nit')?.hasError('pattern')">Debe ser un número entero</mat-error>
+    <mat-error *ngIf="formCliente.get('nit')?.hasError('min')">Debe ser mayor o igual a 0</mat-error>
+    <mat-error *ngIf="formCliente.get('nit')?.hasError('max')">Debe ser menor o igual a 15</mat-error>
+  </mat-form-field>
+  -->
+
+    <mat-form-field appearance="fill">
+      <mat-label>Tipo de documento</mat-label>
+      <mat-select formControlName="tipoDocumento" required>
+        <mat-option value="1">Cédula de identidad</mat-option>
+        <mat-option value="2">Número de identificació tributaria</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formCliente.get('tipoDocumento')?.hasError('required')">
+        Seleccionar una opción es
+        requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Correo Electrónico</mat-label>
+      <input matInput formControlName="email" placeholder="Ingresa tu correo" type="email" required>
+      <mat-error *ngIf="formCliente.get('email')?.hasError('required')">El correo es requerido</mat-error>
+      <mat-error *ngIf="formCliente.get('email')?.hasError('email')">Correo no válido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Grupo Cliente ID</mat-label>
+      <input matInput formControlName="grupoClienteId" placeholder="1" maxlength="3" required>
+      <mat-hint align="end">{{formCliente.get('grupoClienteId')?.value?.length || 0}}/3</mat-hint>
+      <mat-error *ngIf="formCliente.get('grupoClienteId')?.hasError('required')">Grupo Cliente ID es requerido</mat-error>
+      <mat-error *ngIf="formCliente.get('grupoClienteId')?.hasError('maxlength')">
+        Máximo 10 caracteres permitidos
+      </mat-error>
+    </mat-form-field>
+
+
+    <div class="button-container">
+      <button mat-raised-button color="primary" type="submit" [disabled]="formCliente.invalid">Enviar</button>
+    </div>
+
+  </form>
+  <hr>
+
+</div>
 
 <br />
 <br />

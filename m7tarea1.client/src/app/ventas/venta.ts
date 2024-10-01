@@ -5,9 +5,10 @@ export interface Venta {
   nitFacturacion: string;
   nombreFacturacion: string;
   conIva: boolean;
+  formaPago: string;
   descuentoGlobal: string;
   precioTotal: string;
   precioTotalDescuento: string;
-  personaId?: string;
-  empresaId?: string;
+  personaId?: number;
+  empresaId?: number|null;
 }

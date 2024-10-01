@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
+import { Producto } from '../productos/producto';
+
 
 @Component({
   selector: 'app-venta-detalle',
@@ -20,15 +22,52 @@ export class VentaDetalleComponent {
   public ventaDetalle!: MatTableDataSource<VentaDetalle>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  public showNew = false;
+  public formFacturaVenta: FormGroup;
+  public productos?: Producto[];
+
   constructor(
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
     private router: Router) {
   }
 
   ngOnInit() {
     this.get();
-    //this.initForm()
+    this.initForm();
+    this.getProductos();
+  }
+
+  getProductos() {
+    this.http.get<Producto[]>('/api/Productos').subscribe({
+      next: (result) => {
+        this.productos = result;
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
+
+  initForm() {
+    var idParam = this.activatedRoute.snapshot.paramMap.get('ventaId');
+    var id = idParam ? +idParam : 0;
+
+    this.formFacturaVenta = this.fb.group({
+      cantidad: ['', [Validators.required, Validators.min(0), Validators.max(100), Validators.pattern('^[0-9]+$')]], // Validación de enteros entre 0 y 100
+      unidadMedida: ['', [Validators.required]],
+      precio: ['', [Validators.required, Validators.pattern('^-?[0-9]+(\\.[0-9]+)?$')]],
+      descuentoItem: [0],
+      precioDescuento: [0],
+      ventaId: [id, Validators.required],
+      productoId: ['', [Validators.required]]
+    });
+  }
+
+  openBlockNew() {
+    this.showNew = true;
+    this.initForm();
   }
 
   get() {
@@ -45,13 +84,24 @@ export class VentaDetalleComponent {
         } else {
           this.ventaDetalle = new MatTableDataSource<VentaDetalle>(result);
           this.ventaDetalle.paginator = this.paginator;
-        }        
+        }
       },
       error: (error) => {
         console.error(error);
       }
     });
-    
+  }
+
+  registrar() {
+    this.showNew = false;
+    const data = this.formFacturaVenta.getRawValue()
+    console.log('registrar', data);
+    this.http.post<VentaDetalle>('/api/ventaDetalle', data).subscribe({
+      next: (result) => {
+        console.log(result);
+        this.get();
+    }, error: (error) => console.log(error)
+    });
   }
 }
 

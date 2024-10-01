@@ -1,5 +1,69 @@
 <h1 id="tableLabel">Venta Detalle</h1>
 
+<div class="text-right">
+  <button mat-flat-button color="primary" class="btn-add" (click)="openBlockNew()" >Nuevo</button>
+</div>
+<div *ngIf="showNew" class="formulario">
+  <h4>Registrar</h4>
+  <form [formGroup]="formFacturaVenta" (ngSubmit)="registrar()">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Venta ID</mat-label>
+      <input matInput formControlName="ventaId" placeholder="Ingresa un valor" type="number" required disabled>
+      <mat-error *ngIf="formFacturaVenta.get('ventaId')?.hasError('required')">El valor es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Producto</mat-label>
+      <mat-select formControlName="productoId" required>
+        <mat-option *ngFor="let producto of productos"
+                    [value]="producto.id">{{producto.cNombre}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formFacturaVenta.get('productoId')?.hasError('required')">
+        Seleccionar una opción es
+        requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Cantidad</mat-label>
+      <input matInput formControlName="cantidad" placeholder="Ingresa un valor entero" type="number" required>
+      <mat-error *ngIf="formFacturaVenta.get('cantidad')?.hasError('required')">El valor entero es requerido</mat-error>
+      <mat-error *ngIf="formFacturaVenta.get('cantidad')?.hasError('pattern')">Debe ser un número entero</mat-error>
+      <mat-error *ngIf="formFacturaVenta.get('cantidad')?.hasError('min')">Debe ser mayor o igual a 0</mat-error>
+      <mat-error *ngIf="formFacturaVenta.get('cantidad')?.hasError('max')">Debe ser menor o igual a 100</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Unidad de medida</mat-label>
+      <mat-select formControlName="unidadMedida" required>
+        <mat-option value="1">Unidad</mat-option>
+        <mat-option value="2">Docena</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formFacturaVenta.get('unidadMedida')?.hasError('required')">
+        Seleccionar una opción es
+        requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Precio</mat-label>
+      <input matInput formControlName="precio" placeholder="Ingresa un valor" type="number" required>
+      <mat-error *ngIf="formFacturaVenta.get('precio')?.hasError('required')">El valor es requerido</mat-error>
+      <mat-error *ngIf="formFacturaVenta.get('precio')?.hasError('pattern')">
+        Debe ser un número
+        flotante
+      </mat-error>
+    </mat-form-field>
+
+    <div class="button-container">
+      <button mat-raised-button color="primary" type="submit" [disabled]="formFacturaVenta.invalid">Envia Venta</button>
+    </div>
+
+  </form>
+  <hr>
+</div>
+
 <div *ngIf="!ventaDetalle">
   <mat-spinner class="spinner" color="primary" mode="indeterminate"></mat-spinner>
 </div>

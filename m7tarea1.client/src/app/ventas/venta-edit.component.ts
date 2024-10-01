@@ -32,11 +32,12 @@ export class VentaEditComponent implements OnInit {
       nitFactura: [''],
       nombreFactura: [''],
       conIva: [''],
+      formaPago:['unidad'],
       descuentoGlobal: [''],
       precioTotal: [''],
       precioTotalDescuento: [''],
       personaId: [''],
-      empresaId: ['']
+      empresaId: [null]
     });
     this.loadData();
 
