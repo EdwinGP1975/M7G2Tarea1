@@ -24,14 +24,14 @@ namespace M7Tarea1.Server.Controllers
             _servicioDescuento = servicioDescuento;
         }
 
-        // GET: api/Descuentoes
+        // GET: api/Descuentos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Descuento>>> GetDescuento()
         {
             return await _context.Descuento.ToListAsync();
         }
 
-        // GET: api/Descuentoes/5
+        // GET: api/Descuentos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Descuento>> GetDescuento(int id)
         {
@@ -45,7 +45,7 @@ namespace M7Tarea1.Server.Controllers
             return descuento;
         }
 
-        // PUT: api/Descuentoes/5
+        // PUT: api/Descuentos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDescuento(int id, Descuento descuento)
@@ -76,7 +76,7 @@ namespace M7Tarea1.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Descuentoes
+        // POST: api/Descuentos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Descuento>> PostDescuento(Descuento descuento)
@@ -86,7 +86,7 @@ namespace M7Tarea1.Server.Controllers
             return CreatedAtAction("GetDescuento", new { id = descuento.Id }, descuento);
         }
 
-        // DELETE: api/Descuentoes/5
+        // DELETE: api/Descuentos/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDescuento(int id)
         {
@@ -105,6 +105,20 @@ namespace M7Tarea1.Server.Controllers
         private bool DescuentoExists(int id)
         {
             return _context.Descuento.Any(e => e.Id == id);
+        }
+
+        [HttpGet]
+        [Route("GetDescuentoProducto")]
+        public async Task<ActionResult<Descuento>> GetDescuentoProducto(int productoId)
+        {
+            return await _servicioDescuento.GetDescuentoProducto(productoId);
+        }
+
+        [HttpGet]
+        [Route("GetDescuentoGrupoCliente")]
+        public async Task<ActionResult<Descuento>> GetDescuentoGrupoCliente(int grupoClienteId)
+        {
+            return await _servicioDescuento.GetDescuentoGrupoCliente(grupoClienteId);
         }
     }
 }

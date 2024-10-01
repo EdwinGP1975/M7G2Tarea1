@@ -316,7 +316,7 @@ namespace Test_Xunit
             {
                 PorcentajeDescuento = 2.5m,
                 FechaInicio = new DateOnly(2024, 9, 1),
-                FechaFin = new DateOnly(2024, 9, 30),
+                FechaFin = new DateOnly(2024, 10, 10),
                 ProductoId = producto.Id,
             };
             var resultRegistrarDescuento = await controllerDescuento.PostDescuento(descuento);
@@ -341,8 +341,10 @@ namespace Test_Xunit
             var servicioVentaDetalle = new ServicioVentaDetalle(context, servicioProducto, servicioVenta);
             var controllerVentaDetalle = new VentaDetalleController(context, servicioVentaDetalle);
             int cantidadProducto = 1;
+            var today = DateOnly.FromDateTime(DateTime.Now);
             decimal precioTotalProducto = producto.nPrecioLista * cantidadProducto;
-            decimal porcentajeDescuentoProducto = producto.Descuento.ElementAt(0).PorcentajeDescuento;
+            decimal porcentajeDescuentoProducto = producto.Descuento.FirstOrDefault(d => d.ProductoId == producto.Id
+                && d.FechaInicio <= today && d.FechaFin >= today).PorcentajeDescuento;
             decimal precioTotalProductoDescuento = precioTotalProducto - (precioTotalProducto * porcentajeDescuentoProducto / 100);
             var ventaDetalle = new VentaDetalle()
             {
@@ -413,7 +415,7 @@ namespace Test_Xunit
             {
                 PorcentajeDescuento = 5.5m,
                 FechaInicio = new DateOnly(2024, 9, 1),
-                FechaFin = new DateOnly(2024, 9, 30),
+                FechaFin = new DateOnly(2024, 10, 4),
                 GrupoClienteId = grupoCliente.Id,
             };
             var resultRegistrarDescuento = await controllerDescuento.PostDescuento(descuentoGrupoCliente);
@@ -469,7 +471,9 @@ namespace Test_Xunit
             // Act
             var resultRegistrarVentaDetalle = controllerVentaDetalle.PostVentaDetalle(ventaDetalle);
 
-            decimal porcentajeDescuentoGrupoCliente = grupoCliente.Descuento.ElementAt(0).PorcentajeDescuento; //5.5m
+            var today = DateOnly.FromDateTime(DateTime.Now);
+            decimal porcentajeDescuentoGrupoCliente = grupoCliente.Descuento.FirstOrDefault(d => d.GrupoClienteId == grupoCliente.Id
+                && d.FechaInicio <= today && d.FechaFin >= today).PorcentajeDescuento; //5.5m
             decimal precioTotalVenta = precioTotalProducto; // 1012.8m * 1
             decimal precioTotalVentaConDescuento = (decimal)(venta.PrecioTotal - (venta.PrecioTotal * porcentajeDescuentoGrupoCliente / 100)); //1012.8m - (1012.8m * 5.5m / 100);
 

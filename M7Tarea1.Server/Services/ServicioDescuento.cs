@@ -1,6 +1,7 @@
 ﻿
 using M7Tarea1.Server.Data;
 using M7Tarea1.Server.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace M7Tarea1.Server.Services
 {
@@ -25,19 +26,19 @@ namespace M7Tarea1.Server.Services
             await _context.SaveChangesAsync();
         }
 
-        public Descuento GetDescuentoGrupoCliente(int grupoClienteId)
+        public async Task<Descuento> GetDescuentoGrupoCliente(int grupoClienteId)
         {
             var today = DateOnly.FromDateTime(DateTime.Now);
-            var descuento = _context.Descuento.FirstOrDefault(d => d.GrupoClienteId == grupoClienteId
+            var descuento = await _context.Descuento.FirstOrDefaultAsync(d => d.GrupoClienteId == grupoClienteId
                 && d.FechaInicio <= today && d.FechaFin >= today);
 
             return descuento;
         }
 
-        public Descuento GetDescuentoProducto(int productoId)
+        public async Task<Descuento> GetDescuentoProducto(int productoId)
         {
             var today = DateOnly.FromDateTime(DateTime.Now);
-            var descuento = _context.Descuento.FirstOrDefault(d => d.ProductoId == productoId
+            var descuento = await _context.Descuento.FirstOrDefaultAsync(d => d.ProductoId == productoId
                 && d.FechaInicio <= today && d.FechaFin >= today);
 
             return descuento;

@@ -32,7 +32,7 @@ namespace M7Tarea1.Server.Services
         public Descuento GetDescuentoGrupoCliente(int grupoClienteId) 
         {
             var grupoCliente = GetGrupoCliente(grupoClienteId).Result;
-            var descuento = _servicioDescuento.GetDescuentoGrupoCliente(grupoCliente.Id);
+            var descuento = _servicioDescuento.GetDescuentoGrupoCliente(grupoCliente.Id).Result;
             return descuento;
         }
     }

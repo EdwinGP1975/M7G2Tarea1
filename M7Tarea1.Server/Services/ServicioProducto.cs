@@ -29,7 +29,7 @@ namespace M7Tarea1.Server.Services
 
         public Descuento GetDescuentoProducto(int productoId)
         {
-            return _servicioDescuento.GetDescuentoProducto(productoId);
+            return _servicioDescuento.GetDescuentoProducto(productoId).Result;
         }
 
         public void RegistrarPrecioBaseProducto(int idProducto, decimal precio) { }
