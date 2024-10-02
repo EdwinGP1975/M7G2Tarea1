@@ -72,7 +72,8 @@ namespace Test_Xunit
                 PrecioTotalIva = 0,
                 PrecioTotal = 0,
                 DescuentoGlobal = 0,
-                PrecioTotalDescuento = 0
+                PrecioTotalDescuento = 0,
+                FormaPago="Efectivo"
             };
 
             var result = await controllerVenta.PostVenta(venta);
@@ -178,7 +179,8 @@ namespace Test_Xunit
                 PrecioTotalIva = 0,
                 PrecioTotal = 0,
                 DescuentoGlobal = 0,
-                PrecioTotalDescuento = 0
+                PrecioTotalDescuento = 0,
+                FormaPago = "Efectivo"
             };
 
             var result = await controllerVenta.PostVenta(venta);
