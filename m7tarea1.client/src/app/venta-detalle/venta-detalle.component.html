@@ -3,6 +3,7 @@
 <div class="text-right">
   <button mat-flat-button color="primary" class="btn-add" (click)="openBlockNew()" >Nuevo</button>
 </div>
+
 <div *ngIf="showNew" class="formulario">
   <h4>Registrar</h4>
   <form [formGroup]="formFacturaVenta" (ngSubmit)="registrar()">
@@ -46,7 +47,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <!--<mat-form-field appearance="fill">
       <mat-label>Precio</mat-label>
       <input matInput formControlName="precio" placeholder="Ingresa un valor" type="number" required>
       <mat-error *ngIf="formFacturaVenta.get('precio')?.hasError('required')">El valor es requerido</mat-error>
@@ -54,10 +55,10 @@
         Debe ser un número
         flotante
       </mat-error>
-    </mat-form-field>
+    </mat-form-field>-->
 
     <div class="button-container">
-      <button mat-raised-button color="primary" type="submit" [disabled]="formFacturaVenta.invalid">Envia Venta</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="formFacturaVenta.invalid">Agregar Detalle</button>
     </div>
 
   </form>
@@ -116,3 +117,8 @@
 </table>
 
 <mat-paginator [hidden]="!ventaDetalle" [pageSize]="10" [pageSizeOptions]="[10,20,50]" showFirstLastButtons></mat-paginator>
+<br />
+<br />
+<div class="text-right" *ngIf="ventaDetalle">
+  <button mat-flat-button color="primary" class="btn-add" [routerLink]="['/Ventas']">Finalizar</button>
+</div>

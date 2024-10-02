@@ -75,7 +75,7 @@
       <mat-error *ngIf="formCliente.get('email')?.hasError('email')">Correo no válido</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <!--<mat-form-field appearance="fill">
       <mat-label>Grupo Cliente ID</mat-label>
       <input matInput formControlName="grupoClienteId" placeholder="1" maxlength="3" required>
       <mat-hint align="end">{{formCliente.get('grupoClienteId')?.value?.length || 0}}/3</mat-hint>
@@ -83,11 +83,11 @@
       <mat-error *ngIf="formCliente.get('grupoClienteId')?.hasError('maxlength')">
         Máximo 10 caracteres permitidos
       </mat-error>
-    </mat-form-field>
+    </mat-form-field>-->
 
 
     <div class="button-container">
-      <button mat-raised-button color="primary" type="submit" [disabled]="formCliente.invalid">Enviar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="formCliente.invalid">Guardar</button>
     </div>
 
   </form>

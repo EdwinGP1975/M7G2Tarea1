@@ -57,7 +57,7 @@ export class VentaDetalleComponent {
     this.formFacturaVenta = this.fb.group({
       cantidad: ['', [Validators.required, Validators.min(0), Validators.max(100), Validators.pattern('^[0-9]+$')]], // Validación de enteros entre 0 y 100
       unidadMedida: ['', [Validators.required]],
-      precio: ['', [Validators.required, Validators.pattern('^-?[0-9]+(\\.[0-9]+)?$')]],
+      precio: [0, [Validators.required, Validators.pattern('^-?[0-9]+(\\.[0-9]+)?$')]],
       descuentoItem: [0],
       precioDescuento: [0],
       ventaId: [id, Validators.required],

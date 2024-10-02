@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
@@ -22,18 +22,29 @@ export class VentasComponent {
   public showNew = false;
   public formFacturaVenta: FormGroup;
   public personas?: Persona[];
-
+  fechaFormateada?: string;
 
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
+    private activatedRoue: ActivatedRoute,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
     this.get();
+    this.ObtenerFechaHoy();
     this.initForm();
     this.getPersonas();
+  }
+
+  ObtenerFechaHoy() {
+    const fechaActual = new Date();
+    const year = fechaActual.getFullYear();
+    const month = String(fechaActual.getMonth() + 1).padStart(2, '0'); const day = String(fechaActual.getDate()).padStart(2, '0');
+
+    this.fechaFormateada = year+'-'+month+'-'+day;
   }
 
   getPersonas() {
@@ -50,13 +61,13 @@ export class VentasComponent {
   initForm() {
     this.formFacturaVenta = this.fb.group({
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
-      fecha: ['', [Validators.required, Validators.maxLength(10)]],
+      fecha: [this.fechaFormateada, [Validators.required, Validators.maxLength(10)]],
       nitFacturacion: ['', [Validators.required, Validators.maxLength(12)]],
       nombreFacturacion: ['', [Validators.required, Validators.maxLength(20)]],
       conIva: [false],
       descuentoGlobal: [0],
-      precioTotal: ['', [Validators.required, Validators.pattern('^-?[0-9]+(\\.[0-9]+)?$')]],
-      precioTotalDescuento: ['', [Validators.required, Validators.pattern('^-?[0-9]+(\\.[0-9]+)?$')]],
+      precioTotal: [0, [Validators.required, Validators.pattern('^-?[0-9]+(\\.[0-9]+)?$')]],
+      precioTotalDescuento: [0, [Validators.required, Validators.pattern('^-?[0-9]+(\\.[0-9]+)?$')]],
       personaId: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       formaPago: ['', [Validators.required]],
     });
@@ -88,6 +99,7 @@ export class VentasComponent {
       next: (result) => {
         console.log(result);
         this.get();
+        this.router.navigate(['/VentaDetalle/',result.id]);
     }, error: (error) => console.log(error)
     });
   }

@@ -57,7 +57,7 @@ export class PersonasComponent {
       // nit: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       tipoDocumento: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      grupoClienteId: ['', [Validators.required, Validators.maxLength(3)]]
+      grupoClienteId: [1]
     });
   }
 

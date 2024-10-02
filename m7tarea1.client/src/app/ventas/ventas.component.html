@@ -9,6 +9,55 @@
   <form [formGroup]="formFacturaVenta" (ngSubmit)="registrar()">
 
     <mat-form-field appearance="fill">
+      <mat-label>Persona</mat-label>
+      <mat-select formControlName="personaId" required>
+        <mat-option *ngFor="let persona of personas"
+                    [value]="persona.id">{{persona.nombre}} {{persona.apellidos}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formFacturaVenta.get('personaId')?.hasError('required')">
+        Seleccionar una opción es
+        requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nit Facturación</mat-label>
+      <input matInput formControlName="nitFacturacion" placeholder="Ingresa un NIT" maxlength="12" required>
+      <mat-hint align="end">{{formFacturaVenta.get('nitFacturacion')?.value?.length || 0}}/12</mat-hint>
+      <mat-error *ngIf="formFacturaVenta.get('nitFacturacion')?.hasError('required')">El nit es requerido</mat-error>
+      <mat-error *ngIf="formFacturaVenta.get('nitFacturacion')?.hasError('maxlength')">
+        Máximo 12 caracteres
+        permitidos
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre o Razon Social</mat-label>
+      <input matInput formControlName="nombreFacturacion" placeholder="Ingresa su nombre completo" maxlength="100"
+             required>
+      <mat-hint align="end">{{formFacturaVenta.get('nombreFacturacion')?.value?.length || 0}}/100</mat-hint>
+      <mat-error *ngIf="formFacturaVenta.get('nombreFacturacion')?.hasError('required')">
+        El nombre es
+        requerido
+      </mat-error>
+      <mat-error *ngIf="formFacturaVenta.get('nombreFacturacion')?.hasError('maxlength')">
+        Máximo 100 caracteres
+        permitidos
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Forma de pago</mat-label>
+      <mat-select formControlName="formaPago" required>
+        <mat-option value="1">Efectivo</mat-option>
+        <mat-option value="2">Transferencia</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formFacturaVenta.get('formaPago')?.hasError('required')">
+        Seleccionar una opción es
+        requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
       <mat-label>Código (máximo 10 caracteres)</mat-label>
       <input matInput formControlName="codigo" placeholder="Ingresa un código" maxlength="10" required>
       <mat-hint align="end">{{formFacturaVenta.get('codigo')?.value?.length || 0}}/10</mat-hint>
@@ -31,86 +80,39 @@
     </mat-form-field>
 
 
-    <mat-form-field appearance="fill">
-      <mat-label>Nit Facturación</mat-label>
-      <input matInput formControlName="nitFacturacion" placeholder="Ingresa un NIT" maxlength="12" required>
-      <mat-hint align="end">{{formFacturaVenta.get('nitFacturacion')?.value?.length || 0}}/12</mat-hint>
-      <mat-error *ngIf="formFacturaVenta.get('nitFacturacion')?.hasError('required')">El nit es requerido</mat-error>
-      <mat-error *ngIf="formFacturaVenta.get('nitFacturacion')?.hasError('maxlength')">
-        Máximo 12 caracteres
-        permitidos
-      </mat-error>
-    </mat-form-field>
+
+    <!--<mat-form-field appearance="fill">
+    <mat-label>Precio Total</mat-label>
+    <input matInput formControlName="precioTotal" placeholder="Ingresa un valor" type="number" required>
+    <mat-error *ngIf="formFacturaVenta.get('precioTotal')?.hasError('required')">El valor es requerido</mat-error>
+    <mat-error *ngIf="formFacturaVenta.get('precioTotal')?.hasError('pattern')">
+      Debe ser un número
+      flotante
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Precio Total con Descuento</mat-label>
+    <input matInput formControlName="precioTotalDescuento" placeholder="Ingresa un valor" type="number" required>
+    <mat-error *ngIf="formFacturaVenta.get('precioTotalDescuento')?.hasError('required')">
+      El valor es
+      requerido
+    </mat-error>
+    <mat-error *ngIf="formFacturaVenta.get('precioTotalDescuento')?.hasError('pattern')">
+      Debe ser un número
+      flotante
+    </mat-error>
+  </mat-form-field>-->
 
 
-    <mat-form-field appearance="fill">
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="nombreFacturacion" placeholder="Ingresa su nombre completo" maxlength="100"
-             required>
-      <mat-hint align="end">{{formFacturaVenta.get('nombreFacturacion')?.value?.length || 0}}/100</mat-hint>
-      <mat-error *ngIf="formFacturaVenta.get('nombreFacturacion')?.hasError('required')">
-        El nombre es
-        requerido
-      </mat-error>
-      <mat-error *ngIf="formFacturaVenta.get('nombreFacturacion')?.hasError('maxlength')">
-        Máximo 100 caracteres
-        permitidos
-      </mat-error>
-    </mat-form-field>
 
 
-    <mat-form-field appearance="fill">
-      <mat-label>Precio Total</mat-label>
-      <input matInput formControlName="precioTotal" placeholder="Ingresa un valor" type="number" required>
-      <mat-error *ngIf="formFacturaVenta.get('precioTotal')?.hasError('required')">El valor es requerido</mat-error>
-      <mat-error *ngIf="formFacturaVenta.get('precioTotal')?.hasError('pattern')">
-        Debe ser un número
-        flotante
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Precio Total con Descuento</mat-label>
-      <input matInput formControlName="precioTotalDescuento" placeholder="Ingresa un valor" type="number" required>
-      <mat-error *ngIf="formFacturaVenta.get('precioTotalDescuento')?.hasError('required')">
-        El valor es
-        requerido
-      </mat-error>
-      <mat-error *ngIf="formFacturaVenta.get('precioTotalDescuento')?.hasError('pattern')">
-        Debe ser un número
-        flotante
-      </mat-error>
-    </mat-form-field>
 
 
-    <mat-form-field appearance="fill">
-      <mat-label>Forma de pago</mat-label>
-      <mat-select formControlName="formaPago" required>
-        <mat-option value="1">Efectivo</mat-option>
-        <mat-option value="2">Transferencia</mat-option>
-      </mat-select>
-      <mat-error *ngIf="formFacturaVenta.get('formaPago')?.hasError('required')">
-        Seleccionar una opción es
-        requerido
-      </mat-error>
-    </mat-form-field>
-
-
-    <mat-form-field appearance="fill">
-      <mat-label>Persona</mat-label>
-      <mat-select formControlName="personaId" required>
-        <mat-option *ngFor="let persona of personas"
-                    [value]="persona.id">{{persona.nombre}} {{persona.apellidos}}</mat-option>
-      </mat-select>
-      <mat-error *ngIf="formFacturaVenta.get('personaId')?.hasError('required')">
-        Seleccionar una opción es
-        requerido
-      </mat-error>
-    </mat-form-field>
 
 
     <div class="button-container">
-      <button mat-raised-button color="primary" type="submit" [disabled]="formFacturaVenta.invalid">Envia Venta</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="formFacturaVenta.invalid">Guardar Venta</button>
     </div>
 
   </form>
