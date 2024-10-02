@@ -11,7 +11,7 @@ When(/^Usuario registra una nueva venta con 1 solo producto$/) do
     page.registrarVenta(@oVenta)
 end
 
-When(/^Usuario registra una nueva venta con mas de 1 producto$/) do
+When(/^Usuario registra una nueva venta con 2 productos$/) do
     @oVenta = Venta.ventaVariosProductos
     page.registrarVenta(@oVenta)
 end

@@ -9,5 +9,5 @@ Feature: Gestion de Ventas
 
   Scenario: Registro de una nueva venta
     Given Usuario esta en la pagina de Gestion de Ventas 
-    When Usuario registra una nueva venta con mas de 1 producto
+    When Usuario registra una nueva venta con 2 productos
     Then Se comprueba el registro en base de datos de la nueva venta    
