@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+
+gem 'ffi'
+gem 'watir', '6.16.5'
+gem 'watir-scroll'
+gem 'rspec'
+gem 'cucumber'
+gem 'tiny_tds'
