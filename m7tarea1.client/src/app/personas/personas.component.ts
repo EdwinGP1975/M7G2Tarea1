@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
+import { environment } from './../../environments/environment';
+
+
 @Component({
   selector: 'app-personas',
   templateUrl: './personas.component.html',
@@ -31,7 +34,8 @@ export class PersonasComponent {
   }
 
   get() {
-    this.http.get<Persona[]>('/api/Personas').subscribe({
+    var url = environment.apiUrl + 'api/Personas';
+    this.http.get<Persona[]>(url).subscribe({
       next: (result) => {
         this.personas = new MatTableDataSource<Persona>(result);
         this.personas.paginator = this.paginator;
@@ -65,7 +69,8 @@ export class PersonasComponent {
     this.showNew = false;
     const data = this.formCliente.getRawValue()
     console.log('registrar', data);
-    this.http.post<Persona>('/api/Personas', data).subscribe({
+    var url = environment.apiUrl + 'api/Personas';
+    this.http.post<Persona>(url, data).subscribe({
       next: (result) => {
         console.log(result);
         this.get();
