@@ -83,7 +83,8 @@ export class VentasComponent {
   }
 
   get() {
-    this.http.get<Ventas[]>('/api/Ventas').subscribe({
+    var url = environment.baseUrl + 'api/Ventas';
+    this.http.get<Ventas[]>(url).subscribe({
       next: (result) => {
         this.ventas = new MatTableDataSource<Ventas>(result);
         this.ventas.paginator = this.paginator;
