@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test-Xunit", "Test-Xunit\Te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AFCEF3F3-E191-4BAE-B125-324FC0EFD9C8}"
 	ProjectSection(SolutionItems) = preProject
+		BE.web.config = BE.web.config
+		FE.web.config = FE.web.config
 		jenkinsfileBE.groovy = jenkinsfileBE.groovy
 		jenkinsfileFE.groovy = jenkinsfileFE.groovy
 		M7G2_BD_Initial_script.sql = M7G2_BD_Initial_script.sql
