@@ -8,6 +8,9 @@ import { MatPaginator } from '@angular/material/paginator';
 
 import { Producto } from '../productos/producto';
 
+import { environment } from './../../environments/environment';
+
+
 
 @Component({
   selector: 'app-venta-detalle',
@@ -40,7 +43,8 @@ export class VentaDetalleComponent {
   }
 
   getProductos() {
-    this.http.get<Producto[]>('/api/Productos').subscribe({
+    var url = environment.baseUrl + 'api/Productos';
+    this.http.get<Producto[]>(url).subscribe({
       next: (result) => {
         this.productos = result;
       },
@@ -74,7 +78,8 @@ export class VentaDetalleComponent {
     var idParam = this.activatedRoute.snapshot.paramMap.get('ventaId');
     var id = idParam ? +idParam : 0;
 
-    this.http.get<VentaDetalle[]>('/api/ventaDetalle').subscribe({
+    var url = environment.baseUrl + 'api/ventaDetalle';
+    this.http.get<VentaDetalle[]>(url).subscribe({
       next: (result) => {
         let detalles: VentaDetalle[];
         if (id > 0) {
@@ -96,7 +101,8 @@ export class VentaDetalleComponent {
     this.showNew = false;
     const data = this.formFacturaVenta.getRawValue()
     console.log('registrar', data);
-    this.http.post<VentaDetalle>('/api/ventaDetalle', data).subscribe({
+    var url = environment.baseUrl + 'api/ventaDetalle';
+    this.http.post<VentaDetalle>(url, data).subscribe({
       next: (result) => {
         console.log(result);
         this.get();

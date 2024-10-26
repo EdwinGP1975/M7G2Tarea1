@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
+import { environment } from './../../environments/environment';
+
+
 @Component({
   selector: 'app-grupo-cliente',
   templateUrl: './grupo-cliente.component.html',
@@ -26,7 +29,8 @@ export class GrupoClienteComponent {
   }
 
   get() {
-    this.http.get<GrupoClientes[]>('/api/GrupoClientes').subscribe({
+    var url = environment.baseUrl + 'api/GrupoClientes';
+    this.http.get<GrupoClientes[]>(url).subscribe({
       next: (result) => {
         this.grupoClientes = new MatTableDataSource<GrupoClientes>(result);
         this.grupoClientes.paginator = this.paginator;

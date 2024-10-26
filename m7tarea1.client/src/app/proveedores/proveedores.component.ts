@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
+import { environment } from './../../environments/environment';
+
+
 @Component({
   selector: 'app-proveedores',
   templateUrl: './proveedores.component.html',
@@ -29,7 +32,8 @@ export class ProveedoresComponent {
   }
 
   get() {
-    this.http.get<Proveedores[]>('/api/Proveedores').subscribe({
+    var url = environment.baseUrl + 'api/Proveedores';
+    this.http.get<Proveedores[]>(url).subscribe({
       next: (result) => {
         this.proveedores = new MatTableDataSource<Proveedores>(result);
         this.proveedores.paginator = this.paginator;
@@ -46,7 +50,8 @@ export class ProveedoresComponent {
     this.showNew = false;
     const data = this.formRegister.getRawValue()
     console.log('registrar', data);
-    this.http.post<any>('/api/Proveedores', data).subscribe(result => {
+    var url = environment.baseUrl + 'api/Proveedores';
+    this.http.post<any>(url, data).subscribe(result => {
       console.log(result)
       this.get()
     });

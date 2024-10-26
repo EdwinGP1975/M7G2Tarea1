@@ -7,6 +7,9 @@ import { MatPaginator } from '@angular/material/paginator';
 
 import { Persona } from '../personas/persona';
 
+import { environment } from './../../environments/environment';
+
+
 @Component({
   selector: 'app-ventas',
   templateUrl: './ventas.component.html',
@@ -48,7 +51,8 @@ export class VentasComponent {
   }
 
   getPersonas() {
-    this.http.get<Persona[]>('/api/Personas').subscribe({
+    var url = environment.baseUrl + 'api/Personas';
+    this.http.get<Persona[]>(url).subscribe({
       next: (result) => {
         this.personas = result;
       },
@@ -95,7 +99,8 @@ export class VentasComponent {
     this.showNew = false;
     const data = this.formFacturaVenta.getRawValue()
     console.log('registrar', data);
-    this.http.post<Ventas>('/api/Ventas', data).subscribe({
+    var url = environment.baseUrl + 'api/Ventas';
+    this.http.post<Ventas>(url, data).subscribe({
       next: (result) => {
         console.log(result);
         this.get();

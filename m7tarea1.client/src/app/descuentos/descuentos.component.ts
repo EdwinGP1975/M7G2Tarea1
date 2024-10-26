@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { environment } from './../../environments/environment';
+
 
 @Component({
   selector: 'app-descuentos',
@@ -25,7 +27,8 @@ export class DescuentosComponent {
   }
 
   get() {
-    this.http.get<Descuentos[]>('/api/Descuentos').subscribe({
+    var url = environment.baseUrl + 'api/Descuentos';
+    this.http.get<Descuentos[]>(url).subscribe({
       next: (result) => {
         this.descuentos = new MatTableDataSource<Descuentos>(result);
         this.descuentos.paginator = this.paginator;

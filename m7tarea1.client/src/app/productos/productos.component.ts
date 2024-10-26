@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
+import { environment } from './../../environments/environment';
+
+
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
@@ -31,7 +34,8 @@ export class ProductosComponent {
   }
 
   get() {
-    this.http.get<Productos[]>('/api/Productos').subscribe({
+    var url = environment.baseUrl + 'api/Productos';
+    this.http.get<Productos[]>(url).subscribe({
       next: (result) => {
         this.productos = new MatTableDataSource<Productos>(result);
         this.productos.paginator = this.paginator;
@@ -48,7 +52,8 @@ export class ProductosComponent {
     this.showNew = false;
     const data = this.formRegister.getRawValue()
     console.log('registrar', data);
-    this.http.post<any>('/api/Productos', data).subscribe(result => {
+    var url = environment.baseUrl + 'api/Productos';
+    this.http.post<any>(url, data).subscribe(result => {
       console.log(result)
       this.get()
     });

@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+
+import { environment } from './../../environments/environment';
+
 @Component({
   selector: 'app-fabricantes',
   templateUrl: './fabricantes.component.html',
@@ -32,7 +35,8 @@ export class FabricantesComponent {
   }
 
   get() {
-    this.http.get<Fabricantes[]>('/api/Fabricantes').subscribe({
+    var url = environment.baseUrl + 'api/Fabricantes';
+    this.http.get<Fabricantes[]>(url).subscribe({
       next: (result) => {
         this.fabricantes = new MatTableDataSource<Fabricantes>(result);
         this.fabricantes.paginator = this.paginator;
@@ -49,7 +53,8 @@ export class FabricantesComponent {
     this.showNew = false;
     const data = this.formRegister.getRawValue()
     console.log('registrar', data);
-    this.http.post<any>('/api/Fabricantes', data).subscribe(result => {
+    var url = environment.baseUrl + 'api/Fabricantes';
+    this.http.post<any>(url, data).subscribe(result => {
       console.log(result)
       this.get()
     });

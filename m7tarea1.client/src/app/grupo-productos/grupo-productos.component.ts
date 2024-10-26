@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
+import { environment } from './../../environments/environment';
+
+
 @Component({
   selector: 'app-grupo-productos',
   templateUrl: './grupo-productos.component.html',
@@ -30,7 +33,8 @@ export class GrupoProductosComponent {
   }
 
   get() {
-    this.http.get<GrupoProductos[]>('/api/GrupoProductos').subscribe({
+    var url = environment.baseUrl + 'api/GrupoProductos';
+    this.http.get<GrupoProductos[]>(url).subscribe({
       next: (result) => {
         this.grupoProductos = new MatTableDataSource<GrupoProductos>(result);
         this.grupoProductos.paginator = this.paginator;
@@ -47,7 +51,8 @@ export class GrupoProductosComponent {
     this.showNew = false;
     const data = this.formRegister.getRawValue()
     console.log('registrar', data);
-    this.http.post<any>('/api/GrupoProductos', data).subscribe(result => {
+    var url = environment.baseUrl + 'api/GrupoProductos';
+    this.http.post<any>(url, data).subscribe(result => {
       console.log(result)
       this.get()
     });

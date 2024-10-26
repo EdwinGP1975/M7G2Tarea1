@@ -34,7 +34,7 @@ export class PersonasComponent {
   }
 
   get() {
-    var url = environment.apiUrl + 'api/Personas';
+    var url = environment.baseUrl + 'api/Personas';
     this.http.get<Persona[]>(url).subscribe({
       next: (result) => {
         this.personas = new MatTableDataSource<Persona>(result);
@@ -69,7 +69,7 @@ export class PersonasComponent {
     this.showNew = false;
     const data = this.formCliente.getRawValue()
     console.log('registrar', data);
-    var url = environment.apiUrl + 'api/Personas';
+    var url = environment.baseUrl + 'api/Personas';
     this.http.post<Persona>(url, data).subscribe({
       next: (result) => {
         console.log(result);
