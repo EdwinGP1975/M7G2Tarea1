@@ -9,6 +9,13 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "m7tarea1.client", "m7tarea1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test-Xunit", "Test-Xunit\Test-Xunit.csproj", "{4096E65E-851E-4C20-BF3E-D5844EC0A2D0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AFCEF3F3-E191-4BAE-B125-324FC0EFD9C8}"
+	ProjectSection(SolutionItems) = preProject
+		jenkinsfileBE.groovy = jenkinsfileBE.groovy
+		jenkinsfileFE.groovy = jenkinsfileFE.groovy
+		M7G2_BD_Initial_script.sql = M7G2_BD_Initial_script.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
